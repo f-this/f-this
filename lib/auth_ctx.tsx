@@ -6,6 +6,7 @@ interface AuthContextData {
   signIn: (data: SignInWithPasswordlessCredentials) => Promise<any>;
   verifyOTP: (data: VerifyOtpParams) => Promise<any>;
   signOut: () => Promise<any>;
+  loading: boolean;
   user: User | null;
 }
 
@@ -24,9 +25,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   useEffect(() => {
     // get session data if there is an active session
-    const session = supabase.auth.getUser().then((res) => {
-
-
+    supabase.auth.getUser().then((res) => {
       setUser(res.data.user ?? null);
       setLoading(false);
     });
@@ -50,6 +49,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     signIn: (data: SignInWithPasswordlessCredentials) => supabase.auth.signInWithOtp(data),
     verifyOTP: (data: VerifyOtpParams) => supabase.auth.verifyOtp(data),
     signOut: () => supabase.auth.signOut(),
+    loading,
     user,
   };
 

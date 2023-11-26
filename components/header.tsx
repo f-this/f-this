@@ -69,6 +69,18 @@ const Header = (props: HeaderProps = {}) => {
                         <Text style={textStyle.body}>{props.body}</Text>
                     }
                 </View>
+                {/*If action is not null, show the action*/}
+                {props.action &&
+                    <View style={{
+                        flexDirection: "row",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        paddingHorizontal: 34,
+                        paddingTop: 10,
+                    }}>
+                        {props.action}
+                    </View>
+                }
             </SafeAreaView>
             <EndTriangle color={Colors[props.color ?? "blue"]} />
         </View>

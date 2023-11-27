@@ -19,8 +19,7 @@ export default function Home() {
                 onBack={() => router.back()}
                 action={
                     // Buttons go here
-                    <View style={{}}>
-                        <Text style={{ color: "white", fontWeight: "bold" }}>Next</Text>
+                    <View style={{ width: "100%" }}>
                     </View>
                 }
                 showProgress

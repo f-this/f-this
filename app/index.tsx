@@ -24,7 +24,6 @@ export default function Home() {
           </View>
         }
       />
-      <PhoneNumberInput />
     </View>
   );
 }

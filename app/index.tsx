@@ -1,16 +1,12 @@
 import { View, Text, StyleSheet } from "react-native";
-import { useState } from "react";
-import Colors from "../constants/Colors";
-import { SafeAreaView } from "react-native-safe-area-context";
-import Svg, { Path } from "react-native-svg";
 import Header from "../components/header";
 import Button from "../components/button";
 import TextButton from "../components/textButton";
 import { router } from "expo-router";
+import React from "react";
 
 
 export default function Home() {
-
     return (
         <View>
             <Header

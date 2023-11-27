@@ -1,11 +1,8 @@
 import { View, Text, Button } from "react-native";
-import { StyleSheet } from "react-native";
-import Colors from "../constants/Colors";
-import { SafeAreaView } from "react-native-safe-area-context";
-import Svg, { Path } from "react-native-svg"
 import Header from "../components/header";
 import { router } from "expo-router";
 import TextButton from "../components/textButton";
+import React from "react";
 
 
 

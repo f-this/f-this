@@ -1,9 +1,9 @@
-import { Link, Stack, router } from 'expo-router';
-import { StyleSheet, Text, View } from 'react-native';
+import { router } from 'expo-router';
+import { Text, View } from 'react-native';
 import Header from '../components/header';
+import React from 'react';
 
 export default function Home() {
-
   return (
     <View>
       <Header

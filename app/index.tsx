@@ -5,7 +5,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Svg, { Path } from "react-native-svg";
 import Header from "../components/header";
 import Button from "../components/button";
-import PhoneNumberInput from "../components/textBoxPhone";
+import TextBox from "../components/textBox";
 
 export default function Home() {
   return (

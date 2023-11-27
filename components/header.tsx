@@ -68,6 +68,8 @@ const Header = (props: HeaderProps = {}) => {
           )}
           {/*If body is not null, show the body*/}
           {props.body && <Text style={textStyle.body}>{props.body}</Text>}
+          {/*If action is not null, show the action*/}
+          {props.action && props.action}
         </View>
       </SafeAreaView>
       <EndTriangle color={Colors[props.color ?? "blue"]} />

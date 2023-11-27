@@ -1,6 +1,7 @@
 import { Redirect, Stack } from 'expo-router';
 import { useAuth } from '../../lib/auth_ctx';
 import { Text } from 'react-native';
+import React from 'react';
 
 export default function AppLayout() {
     const auth = useAuth();

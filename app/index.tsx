@@ -1,10 +1,11 @@
-import { View, Text } from "react-native";
-import { StyleSheet } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
+import { useState } from "react";
 import Colors from "../constants/Colors";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Svg, { Path } from "react-native-svg";
 import Header from "../components/header";
 import Button from "../components/button";
+import PhoneNumberInput from "../components/textBoxPhone";
 
 export default function Home() {
   return (
@@ -23,6 +24,7 @@ export default function Home() {
           </View>
         }
       />
+      <PhoneNumberInput />
     </View>
   );
 }

@@ -5,14 +5,8 @@ import Svg, { Path } from "react-native-svg";
 import Header from "../components/header";
 import { useState } from "react";
 import { router } from "expo-router";
-import PhoneNumberInput from "../components/textBoxPhone";
 
 export default function Home() {
-  const [phoneNumber, setPhoneNumber] = useState("");
-
-  const handlePhoneNumberChange = (newPhoneNumber: string) => {
-    setPhoneNumber(newPhoneNumber);
-  };
   return (
     <View>
       <Header
@@ -32,10 +26,6 @@ export default function Home() {
         showProgress
         totalSteps={8}
         currentStep={1}
-      />
-      <PhoneNumberInput
-        value={phoneNumber}
-        onChange={handlePhoneNumberChange}
       />
     </View>
   );

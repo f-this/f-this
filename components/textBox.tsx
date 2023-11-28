@@ -10,9 +10,11 @@ import {
 } from "react-native";
 import Colors from "../constants/Colors";
 import shadow from "../constants/shadows";
+import { KeyboardType } from "react-native";
 
 interface textBoxProps {
-  alignment?: string;
+  alignment?: FlexAlignType;
+  keyboardType?: KeyboardType;
   onChange?: (text: string) => void;
   placeholder?: string;
   height?: number;
@@ -22,7 +24,7 @@ interface textBoxProps {
 const TextBoxInput: React.FC<textBoxProps> = (props: textBoxProps) => {
   const [inputText, setInputText] = useState("");
   let textBoxStyle = StyleSheet.compose(styles.container, {
-    alignItems: props.alignment as FlexAlignType,
+    alignItems: props.alignment,
     height: props.height,
     width: props.width,
   });
@@ -34,7 +36,10 @@ const TextBoxInput: React.FC<textBoxProps> = (props: textBoxProps) => {
           style={styles.input}
           placeholder={props.placeholder}
           value={inputText}
+          placeholderTextColor={Colors.black}
+          keyboardType={props.keyboardType}
           onChangeText={(text) => setInputText(text)}
+          clearButtonMode="never"
         />
       </View>
     </View>
@@ -46,8 +51,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
     paddingVertical: 20,
     paddingHorizontal: 12,
-    marginVertical: 10,
-    marginHorizontal: 20,
+    marginVertical: 20,
     // Full width
     justifyContent: "center",
     // Shadow
@@ -61,10 +65,10 @@ const styles = StyleSheet.create({
   },
   inputBox: {
     flexDirection: "row",
-    marginHorizontal: 10,
   },
   input: {
     color: Colors.black,
+    marginHorizontal: 10,
     fontSize: 16,
     fontWeight: "900",
     fontFamily: "InterItalic",

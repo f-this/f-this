@@ -37,7 +37,7 @@ const PhoneNumberInput: React.FC<PhoneNumberInputProps> = (
   }; */
   }
   return (
-    <View style={styles.container}>
+    <View style={styles.container as any}>
       <View style={styles.inputBox}>
         <Image
           source={require("../assets/images/americanflag.png")}
@@ -61,10 +61,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     marginVertical: 10,
     marginHorizontal: 20,
-    // Full width
     alignItems: "center",
     justifyContent: "center",
-    // Shadow
     ...shadow,
   },
   image: {

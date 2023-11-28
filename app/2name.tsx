@@ -2,6 +2,7 @@ import { View, Text } from "react-native";
 import Header from "../components/header";
 import { router } from "expo-router";
 import React from "react";
+import TextBoxInput from "../components/textBox";
 
 
 export default function Home() {
@@ -17,8 +18,10 @@ export default function Home() {
                 onBack={() => router.back()}
                 action={
                     // Buttons go here
-                    <View style={{}}>
-                        <Text style={{ color: "white", fontWeight: "bold" }}>Next</Text>
+                    <View style={{ width: "100%" }}>
+                        <TextBoxInput placeholder="Enter your name" keyboardType="default" onConfirm={() => {
+                            router.push("/3interests");
+                        }} />
                     </View>
                 }
                 showProgress

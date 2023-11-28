@@ -4,6 +4,7 @@ import Svg, { Path } from "react-native-svg";
 import Colors from "../constants/Colors";
 import Logo from "./logo";
 import textStyle from "../constants/textStyles";
+import ProgressBar from "./progressBar";
 
 interface HeaderProps {
   color?: keyof typeof Colors;
@@ -32,7 +33,6 @@ const Header = (props: HeaderProps = {}) => {
         <View
           style={{
             flexDirection: "row",
-            width: "100%",
             alignItems: "flex-start",
             justifyContent: "space-between",
             paddingHorizontal: 34,
@@ -49,6 +49,10 @@ const Header = (props: HeaderProps = {}) => {
               }}
               color={Colors.white}
             />
+          )}
+          {/*If showProgress is true, show the progress bar*/}
+          {props.showProgress && props.currentStep && props.totalSteps && (
+            <ProgressBar fillPercentage={(props.currentStep / props.totalSteps) * 100} style={{ marginTop: 90, marginLeft: 30 }} />
           )}
         </View>
         {/*Column that contains the title and subtitle*/}

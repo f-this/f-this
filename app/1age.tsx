@@ -3,6 +3,8 @@ import Header from "../components/header";
 import { router } from "expo-router";
 import React from "react";
 import TextBoxInput from "../components/textBox";
+import FabButton from "../components/fab";
+import * as Iconoir from "iconoir-react-native";
 
 
 export default function Home() {
@@ -18,7 +20,9 @@ export default function Home() {
                 action={
                     // Buttons go here
                     <View style={{ width: "100%" }}>
-                        <TextBoxInput placeholder="Enter an age" keyboardType="number-pad" />
+                        <TextBoxInput placeholder="Enter an age" keyboardType="number-pad" onConfirm={() => {
+                            router.push("/2name");
+                        }} />
                     </View>
                 }
                 showProgress

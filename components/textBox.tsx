@@ -11,6 +11,8 @@ import {
 import Colors from "../constants/Colors";
 import shadow from "../constants/shadows";
 import { KeyboardType } from "react-native";
+import FabButton from "./fab";
+import { ArrowRight } from "iconoir-react-native";
 
 interface textBoxProps {
   alignment?: FlexAlignType;
@@ -19,6 +21,7 @@ interface textBoxProps {
   placeholder?: string;
   height?: number;
   width?: number;
+  onConfirm?: () => void;
 }
 
 const TextBoxInput: React.FC<textBoxProps> = (props: textBoxProps) => {
@@ -30,18 +33,25 @@ const TextBoxInput: React.FC<textBoxProps> = (props: textBoxProps) => {
   });
 
   return (
-    <View style={textBoxStyle}>
-      <View style={styles.inputBox}>
-        <TextInput
-          style={styles.input}
-          placeholder={props.placeholder}
-          value={inputText}
-          placeholderTextColor={Colors.black}
-          keyboardType={props.keyboardType}
-          onChangeText={(text) => setInputText(text)}
-          clearButtonMode="never"
-        />
+    <View style={styles.surround}>
+      <View style={textBoxStyle}>
+        <View style={styles.inputBox}>
+          <TextInput
+            style={styles.input}
+            placeholder={props.placeholder}
+            value={inputText}
+            placeholderTextColor={Colors.black}
+            keyboardType={props.keyboardType}
+            onChangeText={(text) => setInputText(text)}
+            clearButtonMode="never"
+          />
+        </View>
       </View>
+      {props.onConfirm && inputText && (
+        <FabButton onPress={props.onConfirm}>
+          <ArrowRight color="black" width={30} height={30} strokeWidth={2} />
+        </FabButton>
+      )}
     </View>
   );
 };
@@ -51,11 +61,18 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
     paddingVertical: 20,
     paddingHorizontal: 12,
-    marginVertical: 20,
+    marginLeft: 20,
     // Full width
     justifyContent: "center",
     // Shadow
     ...shadow,
+  },
+  surround: {
+    flexDirection: "column",
+    justifyContent: "center",
+    alignContent: "flex-end",
+    alignItems: "flex-end",
+    paddingVertical: 20,
   },
   image: {
     marginRight: 10,
@@ -71,6 +88,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     fontSize: 16,
     fontWeight: "900",
+    width: "100%",
     fontFamily: "InterItalic",
   },
 });

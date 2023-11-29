@@ -14,6 +14,7 @@ interface dropdownProps {
   onPress: () => void;
   color?: keyof typeof Colors;
   textColor?: keyof typeof Colors;
+  multiselect?: boolean;
 }
 
 export default function Dropdown(props: dropdownProps) {

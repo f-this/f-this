@@ -36,7 +36,7 @@ export default function Home() {
         }
         showProgress
         totalSteps={8}
-        currentStep={1}
+        currentStep={7}
       />
     </View>
   );

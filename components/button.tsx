@@ -37,9 +37,9 @@ const styles = StyleSheet.create({
         ...shadow
     },
     buttonText: {
-        color: Colors.black,
+        color: Colors.darkGray,
         fontSize: 16,
         fontWeight: "900",
-        fontFamily: "InterItalic",
+        fontStyle: "italic",
     },
 });

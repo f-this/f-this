@@ -68,7 +68,6 @@ const styles = StyleSheet.create({
     color: Colors.black,
     fontSize: 16,
     fontWeight: "900",
-    fontFamily: "Inter",
     textTransform: "capitalize",
     letterSpacing: -0.8,
   },

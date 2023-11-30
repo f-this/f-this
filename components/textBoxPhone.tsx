@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
     color: Colors.black,
     fontSize: 16,
     fontWeight: "900",
-    fontFamily: "InterItalic",
+    fontStyle: "italic",
   },
 });
 

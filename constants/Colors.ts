@@ -9,4 +9,5 @@ export default {
   green: "#348521",
   spotify: "#70cc69",
   pink: "#d6005c",
+  darkGray: "#292929",
 };

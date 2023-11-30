@@ -40,7 +40,7 @@ const TextBoxInput: React.FC<textBoxProps> = (props: textBoxProps) => {
             style={styles.input}
             placeholder={props.placeholder}
             value={inputText}
-            placeholderTextColor={Colors.black}
+            placeholderTextColor={Colors.darkGray}
             keyboardType={props.keyboardType}
             onChangeText={(text) => setInputText(text)}
             clearButtonMode="never"
@@ -87,9 +87,7 @@ const styles = StyleSheet.create({
     color: Colors.black,
     marginHorizontal: 10,
     fontSize: 16,
-    fontWeight: "900",
     width: "100%",
-    fontFamily: "InterItalic",
   },
 });
 

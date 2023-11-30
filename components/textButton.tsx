@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
         color: Colors.black,
         fontSize: 16,
         fontWeight: "900",
-        fontFamily: "Inter",
+        fontStyle: "italic",
         textTransform: "capitalize",
         letterSpacing: -0.8,
         textDecorationLine: "underline",

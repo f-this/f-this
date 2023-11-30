@@ -1,4 +1,5 @@
-import { View, Text, Button } from "react-native";
+import { View, Text } from "react-native";
+import Button from "../components/button";
 import Header from "../components/header";
 import { router } from "expo-router";
 import React from "react";
@@ -22,7 +23,7 @@ export default function Home() {
                     // Buttons go here
                     <View style={{ width: "100%" }}>
                         <Button title="Allow Notifications" onPress={() => {
-                            //router.push("/1age");
+                            router.push("/7phone");
                         }} />
                         <TextButton title="Ummmm... No." onPress={() => {
                             router.push("/7phone");

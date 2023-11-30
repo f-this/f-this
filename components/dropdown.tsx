@@ -3,48 +3,63 @@ import {
   View,
   StyleSheet,
   TouchableOpacity,
-  ScrollView,
+  FlatList,
 } from "react-native";
 import Colors from "../constants/Colors";
 import React from "react";
+import shadow from "../constants/shadows";
+import Checkbox, { CheckboxNoState } from "./checkbox";
 
 interface dropdownProps {
   options: string[];
-  optionAmt: number;
-  onPress: () => void;
+  onPress: (value: string) => void;
+  onMultiselect?: (values: string[]) => void;
   color?: keyof typeof Colors;
   textColor?: keyof typeof Colors;
-  multiselect?: boolean;
 }
 
 export default function Dropdown(props: dropdownProps) {
+
+  let [selected, setSelected] = React.useState<string[]>([]);
+
   // Update textColor to be the textColor prop if it exists, otherwise use the default color
   let textStyle = StyleSheet.compose(styles.buttonText, {
     color: Colors[props.textColor ?? "black"],
   });
-  const renderCodeInputs = () => {
-    return props.options.slice(0, props.optionAmt).map((current, index) => (
-      <TouchableOpacity
-        key={index}
-        style={styles.button}
-        onPress={props.onPress}
-      >
-        <Text style={textStyle}>{current}</Text>
-      </TouchableOpacity>
-    ));
-  };
+
   return (
-    <View style={styles.container}>
-      {props.optionAmt > 4 ? (
-        <ScrollView
-          style={styles.scrollView}
-          contentContainerStyle={styles.scrollContent}
-        >
-          {renderCodeInputs()}
-        </ScrollView>
-      ) : (
-        renderCodeInputs()
-      )}
+    <View style={styles.container as any}>
+
+      <FlatList
+        style={styles.scrollView}
+        contentContainerStyle={styles.scrollContent}
+        data={props.options}
+        overScrollMode="never"
+        keyExtractor={(item, _) => item}
+        scrollEnabled={props.options.length > 3}
+        renderItem={({ item }) => (
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => {
+
+              if (props.onMultiselect) {
+                if (selected.includes(item)) {
+                  setSelected(selected.filter((val) => val != item));
+                } else {
+                  setSelected([...selected, item]);
+                }
+                props.onMultiselect(selected);
+              } else {
+                props.onPress(item);
+              }
+            }}
+          >
+            <Text style={textStyle}>{item}</Text>
+            {props.onMultiselect && <CheckboxNoState initialState={selected.includes(item)} onPress={() => { }} />}
+          </TouchableOpacity>
+        )}
+      />
+
     </View>
   );
 }
@@ -53,26 +68,29 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "column",
     justifyContent: "center",
-    borderWidth: 1,
+    backgroundColor: Colors.white,
+    ...shadow
   },
   button: {
-    paddingVertical: 10,
     borderWidth: 1,
     borderColor: "black",
     // Full width
     width: "100%",
-    padding: 10,
+    padding: 12,
     backgroundColor: "white",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   buttonText: {
     color: Colors.black,
-    fontSize: 16,
-    fontWeight: "900",
+    fontSize: 18,
+    fontWeight: "500",
     textTransform: "capitalize",
     letterSpacing: -0.8,
   },
   scrollView: {
-    maxHeight: 165,
+    maxHeight: 250,
   },
   scrollContent: {
     flexGrow: 1,

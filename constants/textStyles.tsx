@@ -23,6 +23,14 @@ const textStyle = StyleSheet.create({
         color: Colors.white,
         marginTop: 20,
         letterSpacing: -0.9,
+    },
+    caption: {
+        fontSize: 15,
+        fontWeight: "400",
+        color: Colors.white,
+        marginTop: 15,
+        letterSpacing: -0.9,
+        fontStyle: "italic",
     }
 });
 

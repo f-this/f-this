@@ -41,6 +41,33 @@ export default function Checkbox(props: checkboxProps) {
     );
 }
 
+export function CheckboxNoState(props: checkboxProps) {
+    const checkboxStyle = StyleSheet.compose(styles.checkbox as any, props.initialState && {
+
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 2,
+            height: 3,
+        },
+        shadowOpacity: 1,
+        shadowRadius: 0,
+        backgroundColor: Colors[props.selectedColor ?? "blue"],
+    });
+
+
+    return (
+
+        <View style={styles.checkbox as any}>
+            {props.initialState && <View style={checkboxStyle}>
+                <Check width={20} height={20} color={"#000"} strokeWidth={5} />
+            </View>}
+        </View>
+    );
+}
+
+
+
+
 const styles = {
     checkbox: {
         width: 32,

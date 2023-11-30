@@ -4,6 +4,7 @@ import shadow from "../constants/shadows";
 import React from "react";
 
 interface ButtonProps {
+    leadingIcon?: JSX.Element;
     title: string;
     onPress: () => void;
     color?: keyof typeof Colors;
@@ -18,6 +19,7 @@ export default function Button(props: ButtonProps) {
 
     return (
         <TouchableOpacity style={buttonStyle} onPress={props.onPress}>
+            {props.leadingIcon}
             <Text style={textStyle}>{props.title}</Text>
         </TouchableOpacity>
     );
@@ -33,6 +35,7 @@ const styles = StyleSheet.create({
         width: "100%",
         alignItems: "center",
         justifyContent: "center",
+        flexDirection: "row",
         // Shadow
         ...shadow
     },
@@ -41,5 +44,6 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: "900",
         fontStyle: "italic",
+        paddingLeft: 10,
     },
 });

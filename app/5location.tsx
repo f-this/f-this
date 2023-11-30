@@ -1,8 +1,9 @@
-import { View, Text, Button } from "react-native";
+import { View, Text } from "react-native";
 import Header from "../components/header";
 import { router } from "expo-router";
 import TextButton from "../components/textButton";
 import React from "react";
+import Button from "../components/button";
 
 export default function Home() {
     return (
@@ -15,16 +16,14 @@ export default function Home() {
                 onBack={() => router.back()}
                 action={
                     // Buttons go here
+
                     <View style={{ width: "100%" }}>
-                        // Buttons go here
-                        <View style={{ width: "100%" }}>
-                            <Button title="Grant Location Access" onPress={() => {
-                                //router.push("/1age");
-                            }} />
-                            <TextButton title="Ummmm... No." onPress={() => {
-                                router.push("/6notifications");
-                            }} />
-                        </View>
+                        <Button title="Grant Location Access" onPress={() => {
+                            router.push("/6notifications");
+                        }} />
+                        <TextButton title="Ummmm... No." onPress={() => {
+                            router.push("/6notifications");
+                        }} />
                     </View>
                 }
                 showProgress

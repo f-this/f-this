@@ -5,11 +5,21 @@ import {
   StyleSheet,
   TextStyle,
   ViewStyle,
+  Text,
 } from "react-native";
 import Colors from "../constants/Colors";
+import {
+  CodeField,
+  Cursor,
+  useBlurOnFulfill,
+  useClearByFocusCell,
+} from 'react-native-confirmation-code-field';
+import shadow from "../constants/shadows";
+
+
 
 interface VerificationCodeInputProps {
-  onChange: (code: string) => void;
+  onChange: (code: string, isValid: boolean) => void;
 }
 
 const VerificationCodeInput: React.FC<VerificationCodeInputProps> = (
@@ -31,7 +41,7 @@ const VerificationCodeInput: React.FC<VerificationCodeInputProps> = (
 
     // Update the state and notify the parent component
     setVerificationCode(newCode);
-    props.onChange(newCode);
+    props.onChange(newCode, newCode.length === 6);
 
     // Move focus to the next input, if available
     if (value.length === 1 && inputRefs[index + 1]) {
@@ -71,13 +81,39 @@ const VerificationCodeInput: React.FC<VerificationCodeInputProps> = (
     return codeInputs;
   };
 
-  return <View style={styles.container}>{renderCodeInputs()}</View>;
+  const [value, setValue] = useState('');
+  const ref = useBlurOnFulfill({ value, cellCount: 6 });
+  const [propsCell, getCellOnLayoutHandler] = useClearByFocusCell({
+    value,
+    setValue,
+  });
+
+  return <View style={styles.container}>
+
+    <CodeField
+      ref={ref}
+      {...propsCell}
+      value={value}
+      onChangeText={setValue}
+      cellCount={6}
+      rootStyle={styles.codeFieldRoot}
+      keyboardType="number-pad"
+      textContentType="oneTimeCode"
+      renderCell={({ index, symbol, isFocused }) => (
+        <Text
+          key={index}
+          style={[styles.cell, isFocused && styles.focusCell, index === 3 && { marginLeft: 30 }]}
+          onLayout={getCellOnLayoutHandler(index)}>
+          {symbol || (isFocused ? <Cursor /> : null)}
+        </Text>
+      )}
+    />
+  </View>;
 };
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row",
-    justifyContent: "center",
+    width: "100%",
   },
   codeInput: {
     width: 40,
@@ -91,6 +127,23 @@ const styles = StyleSheet.create({
   },
   separator: {
     width: 10,
+  },
+  codeFieldRoot: { marginTop: 20 },
+  cell: {
+    flex: 1,
+    height: 70,
+    lineHeight: 38,
+    fontSize: 32,
+    fontStyle: 'italic',
+    fontWeight: 'bold',
+    paddingTop: 15,
+    textAlign: 'center',
+    backgroundColor: Colors.white,
+    marginBottom: 4,
+    ...shadow
+  },
+  focusCell: {
+    borderColor: '#000',
   },
 });
 

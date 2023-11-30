@@ -2,6 +2,8 @@ import { View, Text } from "react-native";
 import Header from "../components/header";
 import { router } from "expo-router";
 import React from "react";
+import VerificationCodeInput from "../components/textBoxVerificationCode";
+import TextButton from "../components/textButton";
 
 export default function Home() {
     return (
@@ -14,8 +16,13 @@ export default function Home() {
                 onBack={() => router.back()}
                 action={
                     // Buttons go here
-                    <View style={{}}>
-                        <Text style={{ color: "white", fontWeight: "bold" }}>Next</Text>
+                    <View style={{ width: "100%" }}>
+                        <VerificationCodeInput
+                            onChange={(code, isValid) => { }}
+                        />
+                        <TextButton title="Resend Verification Code" onPress={() => {
+                            //router.push("/8otp");
+                        }} />
                     </View>
                 }
                 showProgress

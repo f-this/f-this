@@ -2,6 +2,8 @@ import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import Colors from "../constants/Colors";
 import shadow from "../constants/shadows";
 import React from "react";
+import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
+import { Gesture, GestureDetector } from "react-native-gesture-handler";
 
 interface ButtonProps {
     leadingIcon?: JSX.Element;
@@ -12,16 +14,45 @@ interface ButtonProps {
 }
 
 export default function Button(props: ButtonProps) {
+    const shadowOffsetWidth = useSharedValue(3);
+    const shadowOffsetHeight = useSharedValue(4);
+
+
+    const animatedStyle = useAnimatedStyle(() => {
+        return {
+            shadowOffset: {
+                width: shadowOffsetWidth.value,
+                height: shadowOffsetHeight.value,
+            },
+        };
+    });
+
+    const tap = Gesture.Tap().onBegin(() => {
+        shadowOffsetWidth.value = withTiming(0, { duration: 50 });
+        shadowOffsetHeight.value = withTiming(0, { duration: 50 });
+    }).onEnd(() => {
+        console.log("Button finalized");
+        props.onPress();
+    }).onFinalize(() => {
+        console.log("Button released");
+        shadowOffsetWidth.value = withTiming(3);
+        shadowOffsetHeight.value = withTiming(4);
+
+    }).runOnJS(true);
+
     // Update backgroundColor to be the color prop if it exists, otherwise use the default color
     let buttonStyle = StyleSheet.compose(styles.button, { backgroundColor: Colors[props.color ?? "white"] });
     // Update textColor to be the textColor prop if it exists, otherwise use the default color
     let textStyle = StyleSheet.compose(styles.buttonText, { color: Colors[props.textColor ?? "black"] });
 
+
     return (
-        <TouchableOpacity style={buttonStyle} onPress={props.onPress}>
-            {props.leadingIcon}
-            <Text style={textStyle}>{props.title}</Text>
-        </TouchableOpacity>
+        <GestureDetector gesture={tap}>
+            <Animated.View style={[buttonStyle, animatedStyle]}>
+                {props.leadingIcon}
+                <Text style={textStyle}>{props.title}</Text>
+            </Animated.View>
+        </GestureDetector>
     );
 }
 

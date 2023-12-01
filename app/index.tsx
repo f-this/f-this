@@ -27,7 +27,8 @@ export default function Home() {
             <TextButton
               title="I Already Have An Account"
               onPress={() => {
-                router.push("/7phone");
+                //router.push("/7phone");
+                router.push("/customize");
               }}
             />
           </View>

@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
   input: {
     color: Colors.black,
     marginHorizontal: 10,
-    fontSize: 16,
+    fontSize: 20,
     width: "100%",
   },
 });

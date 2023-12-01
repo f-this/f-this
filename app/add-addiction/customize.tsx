@@ -10,21 +10,12 @@ export default function Home() {
     <View>
       <Header
         showLogo
-        title="You think you got a better idea?"
-        body={"Let's see what you have..."}
+        title="I want to replace smoking with..."
+        body={"Do you have an idea?"}
         color="orange"
         onBack={() => router.back()}
       />
       <View style={{ width: "100%", paddingHorizontal: 34, paddingTop: 10 }}>
-        <Text
-          style={{
-            color: "black",
-            fontSize: 16,
-            textAlign: "center",
-          }}
-        >
-          I want to replace smoking with...
-        </Text>
         <TextBoxInput
           placeholder="Enter your alternative habit"
           keyboardType="default"
@@ -33,7 +24,10 @@ export default function Home() {
           }}
         />
         <Text
-          style={[textStyle.caption, { color: Colors.disabled, textAlign: "center", }]}
+          style={[
+            textStyle.caption,
+            { color: Colors.disabled, textAlign: "left" },
+          ]}
         >
           Type your custom alternative to smoking.
         </Text>

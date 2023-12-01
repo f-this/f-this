@@ -13,10 +13,8 @@ import {
   Cursor,
   useBlurOnFulfill,
   useClearByFocusCell,
-} from 'react-native-confirmation-code-field';
+} from "react-native-confirmation-code-field";
 import shadow from "../constants/shadows";
-
-
 
 interface VerificationCodeInputProps {
   onChange: (code: string, isValid: boolean) => void;
@@ -81,34 +79,40 @@ const VerificationCodeInput: React.FC<VerificationCodeInputProps> = (
     return codeInputs;
   };
 
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState("");
   const ref = useBlurOnFulfill({ value, cellCount: 6 });
   const [propsCell, getCellOnLayoutHandler] = useClearByFocusCell({
     value,
     setValue,
   });
 
-  return <View style={styles.container}>
-
-    <CodeField
-      ref={ref}
-      {...propsCell}
-      value={value}
-      onChangeText={setValue}
-      cellCount={6}
-      rootStyle={styles.codeFieldRoot}
-      keyboardType="number-pad"
-      textContentType="oneTimeCode"
-      renderCell={({ index, symbol, isFocused }) => (
-        <Text
-          key={index}
-          style={[styles.cell, isFocused && styles.focusCell, index === 3 && { marginLeft: 30 }]}
-          onLayout={getCellOnLayoutHandler(index)}>
-          {symbol || (isFocused ? <Cursor /> : null)}
-        </Text>
-      )}
-    />
-  </View>;
+  return (
+    <View style={styles.container}>
+      <CodeField
+        ref={ref}
+        {...propsCell}
+        value={value}
+        onChangeText={setValue}
+        cellCount={6}
+        rootStyle={styles.codeFieldRoot}
+        keyboardType="number-pad"
+        textContentType="oneTimeCode"
+        renderCell={({ index, symbol, isFocused }) => (
+          <Text
+            key={index}
+            style={[
+              styles.cell,
+              isFocused && styles.focusCell,
+              index === 3 && { marginLeft: 30 },
+            ]}
+            onLayout={getCellOnLayoutHandler(index)}
+          >
+            {symbol || (isFocused ? <Cursor /> : null)}
+          </Text>
+        )}
+      />
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
@@ -121,7 +125,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: Colors.black,
     textAlign: "center",
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: "bold",
     marginHorizontal: 5,
   },
@@ -134,16 +138,16 @@ const styles = StyleSheet.create({
     height: 70,
     lineHeight: 38,
     fontSize: 32,
-    fontStyle: 'italic',
-    fontWeight: 'bold',
+    fontStyle: "italic",
+    fontWeight: "bold",
     paddingTop: 15,
-    textAlign: 'center',
+    textAlign: "center",
     backgroundColor: Colors.white,
     marginBottom: 4,
-    ...shadow
+    ...shadow,
   },
   focusCell: {
-    borderColor: '#000',
+    borderColor: "#000",
   },
 });
 

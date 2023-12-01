@@ -10,4 +10,5 @@ export default {
   spotify: "#70cc69",
   pink: "#d6005c",
   darkGray: "#292929",
+  disabled: "#969696",
 };

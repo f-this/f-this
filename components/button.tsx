@@ -11,11 +11,12 @@ interface ButtonProps {
     onPress: () => void;
     color?: keyof typeof Colors;
     textColor?: keyof typeof Colors;
+    disabled?: boolean;
 }
 
 export default function Button(props: ButtonProps) {
-    const shadowOffsetWidth = useSharedValue(3);
-    const shadowOffsetHeight = useSharedValue(4);
+    const shadowOffsetWidth = useSharedValue(props.disabled ? 0 : 3);
+    const shadowOffsetHeight = useSharedValue(props.disabled ? 0 : 4);
 
 
     const animatedStyle = useAnimatedStyle(() => {
@@ -28,22 +29,22 @@ export default function Button(props: ButtonProps) {
     });
 
     const tap = Gesture.Tap().onBegin(() => {
+        if (props.disabled) return;
         shadowOffsetWidth.value = withTiming(0, { duration: 50 });
         shadowOffsetHeight.value = withTiming(0, { duration: 50 });
     }).onEnd(() => {
-        console.log("Button finalized");
+        if (props.disabled) return;
         props.onPress();
     }).onFinalize(() => {
-        console.log("Button released");
+        if (props.disabled) return;
         shadowOffsetWidth.value = withTiming(3);
         shadowOffsetHeight.value = withTiming(4);
-
     }).runOnJS(true);
 
     // Update backgroundColor to be the color prop if it exists, otherwise use the default color
-    let buttonStyle = StyleSheet.compose(styles.button, { backgroundColor: Colors[props.color ?? "white"] });
+    let buttonStyle = StyleSheet.compose(styles.button, { backgroundColor: props.disabled ? Colors.disabled : Colors[props.color ?? "white"] });
     // Update textColor to be the textColor prop if it exists, otherwise use the default color
-    let textStyle = StyleSheet.compose(styles.buttonText, { color: Colors[props.textColor ?? "black"] });
+    let textStyle = StyleSheet.compose(styles.buttonText, { color: props.disabled ? Colors.white : Colors[props.textColor ?? "black"] });
 
 
     return (

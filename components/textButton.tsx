@@ -11,10 +11,12 @@ interface ButtonProps {
 
 export default function TextButton(props: ButtonProps) {
     // Update textColor to be the textColor prop if it exists, otherwise use the default color
-    let textStyle = StyleSheet.compose(styles.buttonText, { color: Colors[props.textColor ?? "white"] });
+    let textStyle = StyleSheet.compose(styles.buttonText, {
+        color: Colors[props.textColor ?? "white"],
+    });
 
     return (
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={props.onPress}>
             <Text style={textStyle}>{props.title}</Text>
         </TouchableOpacity>
     );
@@ -34,6 +36,5 @@ const styles = StyleSheet.create({
         textTransform: "capitalize",
         letterSpacing: -0.8,
         textDecorationLine: "underline",
-
     },
 });

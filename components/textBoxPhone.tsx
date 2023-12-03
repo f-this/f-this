@@ -31,7 +31,7 @@ const PhoneNumberInput: React.FC<PhoneNumberInputProps> = (
           props.onChange?.(text, text.length == 10);
         }}
       />
-    </View >
+    </View>
   );
 };
 
@@ -51,12 +51,11 @@ const styles = StyleSheet.create({
     marginLeft: 15,
     height: 20,
     width: 30,
-
   },
   input: {
     color: Colors.black,
     marginHorizontal: 10,
-    fontSize: 16,
+    fontSize: 20,
     flex: 1,
   },
 });

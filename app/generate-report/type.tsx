@@ -31,7 +31,7 @@ export default function Home() {
           options={[
             "Time spent per habit",
             "Breakthroughs",
-            "Personal Replections",
+            "Personal Reflections",
             "Streak",
           ]}
           onMultiselect={(_) => {

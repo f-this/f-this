@@ -31,7 +31,10 @@ export default function Home() {
         action={
           // Buttons go here
           <View style={{ width: "100%" }}>
-            <PhoneNumberInput onChange={(phone, isValid) => {}} />
+            <PhoneNumberInput
+              placeholder={"Enter their phone number"}
+              onChange={(phone, isValid) => {}}
+            />
             <View style={{ flexDirection: "row", justifyContent: "flex-end" }}>
               <FabButton
                 onPress={() => {

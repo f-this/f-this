@@ -6,6 +6,7 @@ import { MaskedTextInput } from "react-native-mask-text";
 
 interface PhoneNumberInputProps {
   onChange?: (text: string, isValid: boolean) => void;
+  placeholder?: string;
 }
 
 const PhoneNumberInput: React.FC<PhoneNumberInputProps> = (
@@ -23,7 +24,7 @@ const PhoneNumberInput: React.FC<PhoneNumberInputProps> = (
         mask="+1 (999) 999-9999"
         style={styles.input}
         keyboardType="number-pad"
-        placeholder="Enter your phone number"
+        placeholder={props.placeholder ?? "Enter your phone number"}
         placeholderTextColor={Colors.darkGray}
         value={inputText}
         onChangeText={(_, text) => {

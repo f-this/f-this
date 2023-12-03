@@ -2,6 +2,8 @@ import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import Colors from "../constants/Colors";
 import shadow from "../constants/shadows";
 import React from "react";
+import { Gesture, GestureDetector } from "react-native-gesture-handler";
+import Animated, { useSharedValue, useAnimatedStyle, withTiming } from "react-native-reanimated";
 
 interface ButtonProps {
   children?: React.ReactNode;
@@ -17,10 +19,36 @@ export default function FabButton(props: ButtonProps) {
     marginTop: props.marginTop,
   });
 
+  const shadowOffsetWidth = useSharedValue(3);
+  const shadowOffsetHeight = useSharedValue(4);
+
+
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      shadowOffset: {
+        width: shadowOffsetWidth.value,
+        height: shadowOffsetHeight.value,
+      },
+    };
+  });
+
+  const tap = Gesture.Tap().onBegin(() => {
+    shadowOffsetWidth.value = withTiming(0, { duration: 50 });
+    shadowOffsetHeight.value = withTiming(0, { duration: 50 });
+  }).onEnd(() => {
+    props.onPress();
+  }).onFinalize(() => {
+    shadowOffsetWidth.value = withTiming(3);
+    shadowOffsetHeight.value = withTiming(4);
+  }).runOnJS(true);
+
+
   return (
-    <TouchableOpacity style={buttonStyle} onPress={props.onPress}>
-      {props.children}
-    </TouchableOpacity>
+    <GestureDetector gesture={tap}>
+      <Animated.View style={[buttonStyle, animatedStyle]}>
+        {props.children}
+      </Animated.View>
+    </GestureDetector>
   );
 }
 

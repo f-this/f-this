@@ -4,8 +4,6 @@ import Button from "../components/button";
 import TextButton from "../components/textButton";
 import { router } from "expo-router";
 import React from "react";
-import Dropdown from "../components/dropdown";
-import ProgressBar from "../components/progressBar";
 
 export default function Home() {
   return (

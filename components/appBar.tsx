@@ -31,55 +31,56 @@ export default function appBar(props: appBarProps) {
               flexDirection: "row",
               alignItems: "center",
               justifyContent: "space-between",
-              paddingHorizontal: 34,
+              paddingHorizontal: 15,
               marginTop: 20,
               marginBottom: 20,
+              width: "100%",
             }}
           >
             {props.home ? (
               <HomeAltSlimHoriz
                 color={Colors.black}
-                width={25}
-                height={25}
+                width={30}
+                height={30}
                 strokeWidth={3}
               />
             ) : (
               <HomeAltSlimHoriz
-                color={Colors.black}
-                width={25}
-                height={25}
+                color={"gray"}
+                width={30}
+                height={30}
                 strokeWidth={3}
               />
             )}
             {props.addiction ? (
               <Logo
                 style={{
-                  height: 36,
-                  width: 51,
-                  shadowColor: "black",
+                  height: 20,
+                  width: 35,
                 }}
+                color={"black"}
               />
             ) : (
               <Logo
                 style={{
-                  height: 36,
-                  width: 51,
-                  color: Colors.black,
+                  height: 20,
+                  width: 35,
                 }}
+                color={"gray"}
               />
             )}
             {props.profile ? (
               <ProfileCircle
                 color={Colors.black}
-                width={25}
-                height={25}
+                width={30}
+                height={30}
                 strokeWidth={3}
               />
             ) : (
               <ProfileCircle
-                color={Colors.black}
-                width={25}
-                height={25}
+                color={"gray"}
+                width={30}
+                height={30}
                 strokeWidth={3}
               />
             )}

@@ -10,6 +10,7 @@ import Svg, { Path } from "react-native-svg";
 import shadow from "../../constants/shadows";
 import Streak from "../../components/dashboard/streak";
 import Checkup from "../../components/dashboard/daily-checkup";
+import ButtonGroup from "../../components/dashboard/button-group";
 import DashboardHeader from "../../components/dashboard/header";
 
 export default function Home() {
@@ -39,6 +40,7 @@ export default function Home() {
           </Svg>
           <Streak />
           <Checkup />
+          <ButtonGroup />
         </View>
       </View>
     </View>

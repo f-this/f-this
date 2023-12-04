@@ -2,6 +2,7 @@ import { router } from "expo-router";
 import { Text, View } from "react-native";
 import Header from "../components/header";
 import React from "react";
+import Button from "../components/button";
 
 export default function Home() {
   return (
@@ -15,13 +16,12 @@ export default function Home() {
         onBack={() => router.back()}
         action={
           // Buttons go here
-          <View style={{}}>
-            <Text style={{ color: "white", fontWeight: "bold" }}>Next</Text>
+          <View style={{
+            width: "100%",
+          }}>
+            <Button title="Go Back" onPress={() => router.back()} />
           </View>
         }
-        showProgress
-        totalSteps={8}
-        currentStep={1}
       />
     </View>
   );

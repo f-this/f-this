@@ -34,12 +34,26 @@ export default function Home() {
           <View style={{ width: "100%" }}>
             <View style={{ width: "100%", flexDirection: "row" }}>
               <ContactButton
-                showIcon={true}
-                text={"Select a contact"}
+                showIcon={false}
+                text={"Jane Doe"}
                 onPress={() => {
                   router.push("./gotten-digits");
                 }}
               />
+            </View>
+            <View style={{ flexDirection: "row", justifyContent: "flex-end" }}>
+              <FabButton
+                onPress={() => {
+                  router.push("../dashboard");
+                }}
+              >
+                <ArrowRight
+                  color="black"
+                  width={30}
+                  height={30}
+                  strokeWidth={2}
+                />
+              </FabButton>
             </View>
           </View>
         }

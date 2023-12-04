@@ -14,7 +14,10 @@ interface contactButtonProps {
   leadingIcon?: JSX.Element;
   onPress: () => void;
   color?: keyof typeof Colors;
+  text: string;
   disabled?: boolean;
+  textColor?: keyof typeof Colors;
+  showIcon: boolean;
 }
 
 export default function contactButton(props: contactButtonProps) {
@@ -53,11 +56,17 @@ export default function contactButton(props: contactButtonProps) {
       ? Colors.disabled
       : Colors[props.color ?? "white"],
   });
+  let textStyle = StyleSheet.compose(styles.buttonText, {
+    color: props.disabled ? Colors.white : Colors[props.textColor ?? "black"],
+  });
 
   return (
     <GestureDetector gesture={tap}>
       <Animated.View style={[buttonStyle, animatedStyle]}>
-        <User color={Colors.black} width={30} height={30} strokeWidth={2} />
+        {props.showIcon && (
+          <User color={Colors.black} width={30} height={25} strokeWidth={3} />
+        )}
+        <Text style={textStyle}> {props.text}</Text>
       </Animated.View>
     </GestureDetector>
   );
@@ -70,11 +79,18 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     marginTop: 10,
     // Full width
-    width: "17%",
+    width: "100%",
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "row",
     // Shadow
     ...shadow,
+  },
+  buttonText: {
+    color: Colors.darkGray,
+    fontSize: 20,
+    fontWeight: "900",
+    fontStyle: "italic",
+    paddingLeft: 10,
   },
 });

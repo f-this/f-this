@@ -14,6 +14,7 @@ export default function Home() {
         color="black"
         onBack={() => router.back()}
       />
+
       <View style={{ width: "100%", paddingHorizontal: 34, paddingTop: 10 }}>
         <Text
           style={[

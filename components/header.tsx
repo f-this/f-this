@@ -115,3 +115,4 @@ function EndTriangle(props: any) {
 }
 
 export default Header;
+export { EndTriangle }

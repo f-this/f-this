@@ -8,7 +8,7 @@ import Animated, {
   withTiming,
 } from "react-native-reanimated";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
-import { ProfileCircle } from "iconoir-react-native";
+import { User } from "iconoir-react-native";
 
 interface contactButtonProps {
   leadingIcon?: JSX.Element;
@@ -57,7 +57,7 @@ export default function contactButton(props: contactButtonProps) {
   return (
     <GestureDetector gesture={tap}>
       <Animated.View style={[buttonStyle, animatedStyle]}>
-        <ProfileCircle />
+        <User color={Colors.black} width={30} height={30} strokeWidth={2} />
       </Animated.View>
     </GestureDetector>
   );

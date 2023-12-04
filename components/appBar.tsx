@@ -38,18 +38,17 @@ export default function appBar(props: appBarProps) {
           >
             {props.home ? (
               <HomeAltSlimHoriz
-                style={{
-                  height: 36,
-                  width: 51,
-                  borderColor: "black",
-                }}
+                color={Colors.black}
+                width={25}
+                height={25}
+                strokeWidth={3}
               />
             ) : (
               <HomeAltSlimHoriz
-                style={{
-                  height: 36,
-                  width: 51,
-                }}
+                color={Colors.black}
+                width={25}
+                height={25}
+                strokeWidth={3}
               />
             )}
             {props.addiction ? (
@@ -71,18 +70,17 @@ export default function appBar(props: appBarProps) {
             )}
             {props.profile ? (
               <ProfileCircle
-                style={{
-                  height: 36,
-                  width: 51,
-                  shadowColor: "black",
-                }}
+                color={Colors.black}
+                width={25}
+                height={25}
+                strokeWidth={3}
               />
             ) : (
               <ProfileCircle
-                style={{
-                  height: 36,
-                  width: 51,
-                }}
+                color={Colors.black}
+                width={25}
+                height={25}
+                strokeWidth={3}
               />
             )}
           </View>

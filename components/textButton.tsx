@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: Colors.black,
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: "900",
     fontStyle: "italic",
     textTransform: "capitalize",

@@ -11,13 +11,13 @@ const textStyle = StyleSheet.create({
   },
   subtitle: {
     fontStyle: "italic",
-    fontSize: 38,
+    fontSize: 36,
     fontWeight: "700",
     color: Colors.white,
     marginTop: 20,
   },
   body: {
-    fontSize: 25,
+    fontSize: 18,
     fontWeight: "500",
     color: Colors.white,
     marginTop: 20,

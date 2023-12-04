@@ -19,7 +19,7 @@ export default function Home() {
         type: "sms",
       });
       if (!result.error) {
-        router.push("./app/index");
+        router.push("/");
         console.log("success");
       } else {
         console.log(result.error);

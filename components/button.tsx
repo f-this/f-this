@@ -17,6 +17,7 @@ interface ButtonProps {
   textColor?: keyof typeof Colors;
   disabled?: boolean;
   height?: number;
+  marginTop?: number;
 }
 
 export default function Button(props: ButtonProps) {
@@ -54,6 +55,7 @@ export default function Button(props: ButtonProps) {
     backgroundColor: props.disabled
       ? Colors.disabled
       : Colors[props.color ?? "white"],
+    marginTop: props.marginTop,
   });
   // Update textColor to be the textColor prop if it exists, otherwise use the default color
   let textStyle = StyleSheet.compose(styles.buttonText, {

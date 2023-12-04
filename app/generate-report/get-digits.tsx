@@ -11,6 +11,7 @@ import React from "react";
 import { ArrowRight } from "iconoir-react-native";
 import FabButton from "../../components/fab";
 import PhoneNumberInput from "../../components/textBoxPhone";
+import ContactButton from "../../components/contactButton";
 
 export default function Home() {
   const [selected, setSelected] = React.useState<string[]>([]);
@@ -31,10 +32,14 @@ export default function Home() {
         action={
           // Buttons go here
           <View style={{ width: "100%" }}>
-            <PhoneNumberInput
-              placeholder={"Enter their phone number"}
-              onChange={(phone, isValid) => {}}
-            />
+            <View style={{ width: "100%", flexDirection: "row" }}>
+              <PhoneNumberInput
+                placeholder={"Enter their phone number"}
+                onChange={(phone, isValid) => {}}
+                width={300}
+              />
+              <ContactButton onPress={() => console.log("hello")} />
+            </View>
             <View style={{ flexDirection: "row", justifyContent: "flex-end" }}>
               <FabButton
                 onPress={() => {

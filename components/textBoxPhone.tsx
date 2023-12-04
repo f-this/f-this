@@ -7,6 +7,7 @@ import { MaskedTextInput } from "react-native-mask-text";
 interface PhoneNumberInputProps {
   onChange?: (text: string, isValid: boolean) => void;
   placeholder?: string;
+  width?: number;
 }
 
 const PhoneNumberInput: React.FC<PhoneNumberInputProps> = (
@@ -15,7 +16,11 @@ const PhoneNumberInput: React.FC<PhoneNumberInputProps> = (
   const [inputText, setInputText] = useState("");
 
   return (
-    <View style={styles.container as any}>
+    <View
+      style={StyleSheet.compose(styles.container as any, {
+        width: props.width,
+      })}
+    >
       <Image
         source={require("../assets/images/americanflag.png")}
         style={styles.image}

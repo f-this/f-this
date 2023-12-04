@@ -1,17 +1,17 @@
 import { View, Text } from "react-native";
-import Header from "../../components/header";
+import Header from "../../../components/header";
 import { router } from "expo-router";
-import Button from "../../components/button";
-import TextBoxInput from "../../components/textBox";
-import textStyle from "../../constants/textStyles";
-import Colors from "../../constants/Colors";
-import Dropdown from "../../components/dropdown";
-import TextButton from "../../components/textButton";
+import Button from "../../../components/button";
+import TextBoxInput from "../../../components/textBox";
+import textStyle from "../../../constants/textStyles";
+import Colors from "../../../constants/Colors";
+import Dropdown from "../../../components/dropdown";
+import TextButton from "../../../components/textButton";
 import React from "react";
 import { ArrowRight } from "iconoir-react-native";
-import FabButton from "../../components/fab";
-import PhoneNumberInput from "../../components/textBoxPhone";
-import ContactButton from "../../components/contactButton";
+import FabButton from "../../../components/fab";
+import PhoneNumberInput from "../../../components/textBoxPhone";
+import ContactButton from "../../../components/contactButton";
 
 export default function Home() {
   const [selected, setSelected] = React.useState<string[]>([]);

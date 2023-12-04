@@ -1,10 +1,10 @@
 import { View, Text } from "react-native";
-import Header from "../../components/header";
+import Header from "../../../components/header";
 import { router } from "expo-router";
-import Button from "../../components/button";
-import TextBoxInput from "../../components/textBox";
-import textStyle from "../../constants/textStyles";
-import Colors from "../../constants/Colors";
+import Button from "../../../components/button";
+import TextBoxInput from "../../../components/textBox";
+import textStyle from "../../../constants/textStyles";
+import Colors from "../../../constants/Colors";
 export default function Home() {
   return (
     <View>

@@ -1,10 +1,10 @@
 import { View, Text } from "react-native";
-import Header from "../../components/header";
-import Button from "../../components/button";
+import Header from "../../../components/header";
+import Button from "../../../components/button";
 import { router } from "expo-router";
 import React from "react";
-import textStyle from "../../constants/textStyles";
-import Colors from "../../constants/Colors";
+import textStyle from "../../../constants/textStyles";
+import Colors from "../../../constants/Colors";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { InfoCircle, Refresh } from "iconoir-react-native";
 
@@ -49,7 +49,7 @@ export default function Home() {
             <View style={{ height: 10 }} />
             <Button
               title="Slide into their DMs (Instagram)"
-              onPress={() => {}}
+              onPress={() => { }}
               color="pink"
               textColor="white"
             />
@@ -58,7 +58,7 @@ export default function Home() {
 
             <Button
               title="Slide into their inbox (email)"
-              onPress={() => {}}
+              onPress={() => { }}
               color="purple"
               textColor="white"
             />
@@ -67,7 +67,7 @@ export default function Home() {
 
             <Button
               title="I will share it myself"
-              onPress={() => {}}
+              onPress={() => { }}
               color="blue"
               textColor="white"
             />

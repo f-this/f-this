@@ -17,7 +17,7 @@ export default function AppLayout() {
     if (!auth.user) {
         // On web, static rendering will stop here as the user is not authenticated
         // in the headless Node process that the pages are rendered in.
-        return <Redirect href="/1age" />;
+        return <Redirect href="/0start" />;
     }
 
     // This layout can be deferred because it's not the root layout.

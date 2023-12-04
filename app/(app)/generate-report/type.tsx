@@ -1,12 +1,12 @@
 import { View, Text } from "react-native";
-import Header from "../../components/header";
+import Header from "../../../components/header";
 import { router } from "expo-router";
-import Button from "../../components/button";
-import TextBoxInput from "../../components/textBox";
-import textStyle from "../../constants/textStyles";
-import Colors from "../../constants/Colors";
-import Dropdown from "../../components/dropdown";
-import TextButton from "../../components/textButton";
+import Button from "../../../components/button";
+import TextBoxInput from "../../../components/textBox";
+import textStyle from "../../../constants/textStyles";
+import Colors from "../../../constants/Colors";
+import Dropdown from "../../../components/dropdown";
+import TextButton from "../../../components/textButton";
 import React from "react";
 
 export default function Home() {
@@ -37,7 +37,7 @@ export default function Home() {
           onMultiselect={(_) => {
             setSelected(_);
           }}
-          onPress={() => {}}
+          onPress={() => { }}
         />
         <Button
           title="All done!"

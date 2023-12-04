@@ -1,10 +1,10 @@
 import { View } from "react-native";
-import Header from "../../components/header";
-import Button from "../../components/button";
-import TextButton from "../../components/textButton";
+import Header from "../../../components/header";
+import Button from "../../../components/button";
+import TextButton from "../../../components/textButton";
 import { router } from "expo-router";
 import React from "react";
-import Dropdown from "../../components/dropdown";
+import Dropdown from "../../../components/dropdown";
 
 export default function Home() {
     const [selected, setSelected] = React.useState<string[]>([]);

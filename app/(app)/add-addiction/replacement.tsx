@@ -1,10 +1,10 @@
 import { View, Text } from "react-native";
-import Header from "../../components/header";
-import Button from "../../components/button";
+import Header from "../../../components/header";
+import Button from "../../../components/button";
 import { router } from "expo-router";
 import React from "react";
-import textStyle from "../../constants/textStyles";
-import Colors from "../../constants/Colors";
+import textStyle from "../../../constants/textStyles";
+import Colors from "../../../constants/Colors";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { InfoCircle, Refresh } from "iconoir-react-native";
 
@@ -63,7 +63,7 @@ export default function Home() {
             </View>
             <Button
               title="Chewing Gum"
-              onPress={() => {}}
+              onPress={() => { }}
               color="pink"
               textColor="white"
             />
@@ -125,7 +125,7 @@ export default function Home() {
 
             <Button
               title="Eating Dark Chocolate"
-              onPress={() => {}}
+              onPress={() => { }}
               color="purple"
               textColor="white"
             />

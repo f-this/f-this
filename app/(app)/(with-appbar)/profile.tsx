@@ -19,7 +19,7 @@ export default function Home() {
     real = addiction;
   }
   return (
-    <SafeAreaView>
+    <View>
       <Header />
       <View style={{ marginLeft: 40, marginRight: 40 }}>
         <Text
@@ -75,7 +75,7 @@ export default function Home() {
           marginTop={30}
         />
       </View>
-    </SafeAreaView>
+    </View>
   );
 }
 

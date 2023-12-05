@@ -1,9 +1,14 @@
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { Slot, SplashScreen, Stack } from 'expo-router';
-import { useEffect } from 'react';
-import { useColorScheme } from 'react-native';
-import { AuthProvider } from '../lib/auth_ctx';
+import FontAwesome from "@expo/vector-icons/FontAwesome";
+import {
+  DarkTheme,
+  DefaultTheme,
+  ThemeProvider,
+} from "@react-navigation/native";
+import { Slot, SplashScreen, Stack } from "expo-router";
+import { useEffect } from "react";
+import { useColorScheme } from "react-native";
+import { AuthProvider } from "../lib/auth_ctx";
+import { ProfileProvider } from "../lib/profile_ctx";
 
 import {
   useFonts,
@@ -16,24 +21,22 @@ import {
   Inter_700Bold,
   Inter_800ExtraBold,
   Inter_900Black,
-} from '@expo-google-fonts/inter';
-
+} from "@expo-google-fonts/inter";
 
 export {
   // Catch any errors thrown by the Layout component.
   ErrorBoundary,
-} from 'expo-router';
+} from "expo-router";
 
 export const unstable_settings = {
   // Ensure that reloading on `/modal` keeps a back button present.
-  initialRouteName: 'index',
+  initialRouteName: "index",
 };
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  
   let [loaded, error] = useFonts({
     Inter_100Thin,
     Inter_200ExtraLight,
@@ -46,7 +49,6 @@ export default function RootLayout() {
     Inter_900Black,
     ...FontAwesome.font,
   });
-
 
   // Expo Router uses Error Boundaries to catch errors in the navigation tree.
   useEffect(() => {
@@ -67,12 +69,13 @@ export default function RootLayout() {
 }
 
 function RootLayoutNav() {
-
   return (
     <AuthProvider>
-      <ThemeProvider value={DefaultTheme}>
-        <Slot />
-      </ThemeProvider>
-    </AuthProvider >
+      <ProfileProvider>
+        <ThemeProvider value={DefaultTheme}>
+          <Slot />
+        </ThemeProvider>
+      </ProfileProvider>
+    </AuthProvider>
   );
 }

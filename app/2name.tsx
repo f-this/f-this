@@ -31,8 +31,10 @@ export default function Home() {
             <TextBoxInput
               placeholder="Enter your name"
               keyboardType="default"
-              onChange={handleNameChange}
-              onConfirm={handleConfirm}
+              onConfirm={() => {
+                console.log(name);
+                router.push("/3interests");
+              }}
             />
           </View>
         }

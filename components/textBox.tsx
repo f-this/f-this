@@ -21,7 +21,7 @@ interface textBoxProps {
   placeholder?: string;
   height?: number;
   width?: number;
-  onConfirm?: () => void;
+  onConfirm?: (text: string) => void;
 }
 
 const TextBoxInput: React.FC<textBoxProps> = (props: textBoxProps) => {
@@ -47,14 +47,14 @@ const TextBoxInput: React.FC<textBoxProps> = (props: textBoxProps) => {
               if (props.onChange) props.onChange(text);
             }}
             onSubmitEditing={() => {
-              if (props.onConfirm) props.onConfirm();
+              if (props.onConfirm) props.onConfirm(inputText);
             }}
             clearButtonMode="never"
           />
         </View>
       </View>
       {props.onConfirm && inputText && (
-        <FabButton onPress={props.onConfirm}>
+        <FabButton onPress={() => { props.onConfirm && props.onConfirm(inputText) }}>
           <ArrowRight color="black" width={30} height={30} strokeWidth={2} />
         </FabButton>
       )}

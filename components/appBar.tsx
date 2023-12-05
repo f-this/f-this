@@ -7,10 +7,12 @@ import { ProfileCircle } from "iconoir-react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { router, useGlobalSearchParams, usePathname } from "expo-router";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { useAuth } from "../lib/auth_ctx";
 
 export default function appBar() {
   const pathname = usePathname();
   const params = useGlobalSearchParams();
+  const auth = useAuth();
 
   if (params.hideAppBar) return (<View></View>);
 
@@ -91,7 +93,10 @@ export default function appBar() {
               strokeWidth={3}
             />
           ) : (
-            <TouchableOpacity onPress={() => { router.push("/profile") }}>
+            <TouchableOpacity onPress={() => { router.push("/profile") }} onLongPress={
+              () => {
+                auth.signOut();
+              }}>
               <ProfileCircle
                 color={"gray"}
                 width={30}

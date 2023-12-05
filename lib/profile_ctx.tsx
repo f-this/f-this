@@ -2,7 +2,7 @@ import { createContext, useContext, useState, useEffect } from "react";
 import { supabase } from "./supabase";
 import { User } from "@supabase/supabase-js";
 
-interface UserContextData {
+export interface UserContextData {
   id: string | null;
   phone: string | null;
   name: string | null;
@@ -117,22 +117,27 @@ export const ProfileProvider: React.FC<ProfileContextProps> = ({
       if (data.addiction) {
         setAddiction(data.addiction);
       }
+      console.log("Storing local data:", data);
     },
     updateUserProfile: async (data: Partial<UserContextData>) => {
-      if (userProfile) {
+      let fallbackUser = (await supabase.auth.getUser()).data.user;
+      if (userProfile || fallbackUser) {
         try {
-          const { data, error } = await supabase
+          let updateData = {
+            id: userProfile ? userProfile.id : fallbackUser?.id,
+            phone: phone,
+            name: name,
+            age: age,
+            interests: interests,
+            location: locationEnabled,
+            spotify: spotifyEnabled,
+            notifications: notificationsEnabled,
+          };
+          const { error } = await supabase
             .from("users")
-            .upsert([{ ...userProfile, id: userProfile.id }]);
-
+            .update(updateData).eq("id", (userProfile ? userProfile.id : fallbackUser?.id));
           if (error) {
             console.error("Error updating user profile:", error);
-          } else {
-            // Update the local state with the new data
-            setUserProfile((prevProfile) => ({
-              ...prevProfile,
-              ...userProfile,
-            }));
           }
         } catch (error) {
           console.error("Error updating user profile:", error);

@@ -14,12 +14,9 @@ import { useProf } from "../../../lib/profile_ctx";
 
 export default function Home() {
   const { addiction, locationEnabled, spotifyEnabled } = useProf();
-  let real = "Smoking";
-  if (addiction != "" && addiction) {
-    real = addiction;
-  }
+
   return (
-    <SafeAreaView>
+    <View>
       <Header />
       <View style={{ marginLeft: 40, marginRight: 40 }}>
         <Text
@@ -35,7 +32,7 @@ export default function Home() {
           You are currently working on quitting
         </Text>
         <Text style={StyleSheet.compose(textStyle.body, styles.answer)}>
-          {real}
+          {addiction ? addiction : "Unknown"}
         </Text>
         <Text style={StyleSheet.compose(textStyle.body, styles.prompt)}>
           You have been working on this for
@@ -48,7 +45,7 @@ export default function Home() {
             Location Access:
           </Text>
           <Text style={StyleSheet.compose(textStyle.body, styles.answer)}>
-            {locationEnabled.toString() ?? "false"}
+            {locationEnabled ? "Enabled" : "Disabled"}
           </Text>
         </View>
         <View style={styles.row}>
@@ -56,7 +53,7 @@ export default function Home() {
             Spotify Integration:
           </Text>
           <Text style={StyleSheet.compose(textStyle.body, styles.answer)}>
-            {spotifyEnabled.toString() ?? "false"}
+            {spotifyEnabled ? "Enabled" : "Disabled"}
           </Text>
         </View>
         <View style={styles.row}>
@@ -75,7 +72,7 @@ export default function Home() {
           marginTop={30}
         />
       </View>
-    </SafeAreaView>
+    </View>
   );
 }
 

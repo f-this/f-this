@@ -41,14 +41,16 @@ export default function Dropdown(props: dropdownProps) {
           <TouchableOpacity
             style={styles.button}
             onPress={() => {
-
               if (props.onMultiselect) {
-                if (selected.includes(item)) {
-                  setSelected(selected.filter((val) => val != item));
+                let selectedNew = [...selected];
+                if (selected.length != 0 && selected.includes(item)) {
+                  selectedNew.splice(selectedNew.indexOf(item), 1);
+                  setSelected(selectedNew);
                 } else {
-                  setSelected([...selected, item]);
+                  selectedNew.push(item);
+                  setSelected(selectedNew);
                 }
-                props.onMultiselect(selected);
+                props.onMultiselect(selectedNew);
               } else {
                 props.onPress(item);
               }

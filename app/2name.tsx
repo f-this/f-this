@@ -32,9 +32,9 @@ export default function Home() {
               placeholder="Enter your name"
               keyboardType="default"
               onConfirm={() => {
-                console.log(name);
-                router.push("/3interests");
+                handleConfirm();
               }}
+              onChange={handleNameChange}
             />
           </View>
         }

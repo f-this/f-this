@@ -6,7 +6,7 @@ import VerificationCodeInput from "../components/textBoxVerificationCode";
 import TextButton from "../components/textButton";
 import { useState } from "react";
 import { useAuth } from "../lib/auth_ctx";
-import { useProf } from "../lib/profile_ctx";
+import { UserContextData, useProf } from "../lib/profile_ctx";
 
 export default function Home() {
   const [OTP, setOTP] = useState("");
@@ -28,8 +28,9 @@ export default function Home() {
         token: code,
         type: "sms",
       });
+      
       if (!result.error) {
-        updateUserProfile({
+        let data = {
           spotifyEnabled: spotifyEnabled,
           age: age,
           name: name,
@@ -37,7 +38,9 @@ export default function Home() {
           locationEnabled: locationEnabled,
           interests: interests,
           phone: phone,
-        });
+        } as Partial<UserContextData>;
+        console.log("Updating user profile with data:", data);
+        updateUserProfile(data);
         router.push("/");
       }
     }

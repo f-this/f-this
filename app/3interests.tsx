@@ -46,18 +46,19 @@ export default function Home() {
                 "Biking",
               ]}
               onMultiselect={(_) => {
+                console.log(_);
                 handleInterestChange(_);
               }}
-              onPress={() => {}}
+              onPress={() => { }}
             />
             <View
               style={{ flexDirection: "row", justifyContent: "space-between" }}
             >
               <Text style={textStyle.caption}>Select at least 2 interests</Text>
-              <FabButton
+              {interests.length >= 2 && <FabButton
                 marginTop={10}
                 onPress={() => {
-                  router.push("/4spotify");
+                  handleConfirm();
                 }}
               >
                 <ArrowRight
@@ -66,7 +67,7 @@ export default function Home() {
                   height={30}
                   strokeWidth={2}
                 />
-              </FabButton>
+              </FabButton>}
             </View>
           </View>
         }

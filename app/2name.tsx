@@ -23,7 +23,6 @@ export default function Home() {
               placeholder="Enter your name"
               keyboardType="default"
               onConfirm={() => {
-                console.log(age);
                 router.push("/3interests");
               }}
             />

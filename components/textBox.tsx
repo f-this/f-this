@@ -42,7 +42,13 @@ const TextBoxInput: React.FC<textBoxProps> = (props: textBoxProps) => {
             value={inputText}
             placeholderTextColor={Colors.darkGray}
             keyboardType={props.keyboardType}
-            onChangeText={(text) => setInputText(text)}
+            onChangeText={(text) => {
+              setInputText(text);
+              if (props.onChange) props.onChange(text);
+            }}
+            onSubmitEditing={() => {
+              if (props.onConfirm) props.onConfirm();
+            }}
             clearButtonMode="never"
           />
         </View>

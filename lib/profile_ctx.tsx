@@ -12,6 +12,7 @@ interface UserContextData {
   notificationsEnabled: boolean;
   age: string | null;
   userProfile: User | null;
+  addiction: string | null;
   storeLocal: (data: Partial<UserContextData>) => void;
   updateUserProfile: (data: Partial<UserContextData>) => Promise<any>;
   fetchUserProfile: (data: Partial<UserContextData>) => Promise<any>;
@@ -33,6 +34,7 @@ export const ProfileProvider: React.FC<ProfileContextProps> = ({
   const [phone, setPhone] = useState("");
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
+  const [addiction, setAddiction] = useState("");
   const [interests, setInterests] = useState([""]);
   const [locationEnabled, setLocationEnabled] = useState(false);
   const [spotifyEnabled, setSpotifyEnabled] = useState(false);
@@ -70,6 +72,7 @@ export const ProfileProvider: React.FC<ProfileContextProps> = ({
     notificationsEnabled,
     age,
     userProfile,
+    addiction,
     fetchUserProfile: async () => {
       const { data: user, data: id, error } = await supabase.auth.getUser();
 
@@ -110,6 +113,9 @@ export const ProfileProvider: React.FC<ProfileContextProps> = ({
       }
       if (data.notificationsEnabled !== undefined) {
         setNotificationsEnabled(data.notificationsEnabled);
+      }
+      if (data.addiction) {
+        setAddiction(data.addiction);
       }
     },
     updateUserProfile: async (data: Partial<UserContextData>) => {

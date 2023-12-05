@@ -45,7 +45,9 @@ export default function Home() {
                 "Tennis",
                 "Biking",
               ]}
-              onMultiselect={(_) => {}}
+              onMultiselect={(_) => {
+                handleInterestChange(_);
+              }}
               onPress={() => {}}
             />
             <View

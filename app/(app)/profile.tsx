@@ -10,8 +10,14 @@ import Colors from "../../constants/Colors";
 import textStyle from "../../constants/textStyles";
 import { Bold, Safe } from "iconoir-react-native";
 import AppBar from "../../components/appBar";
+import { useProf } from "../../lib/profile_ctx";
 
 export default function Home() {
+  const { addiction, locationEnabled, spotifyEnabled } = useProf();
+  let real = "Smoking";
+  if (addiction != "" && addiction) {
+    real = addiction;
+  }
   return (
     <SafeAreaView>
       <Header />
@@ -29,20 +35,20 @@ export default function Home() {
           You are currently working on quitting
         </Text>
         <Text style={StyleSheet.compose(textStyle.body, styles.answer)}>
-          insert addiction
+          {real}
         </Text>
         <Text style={StyleSheet.compose(textStyle.body, styles.prompt)}>
           You have been working on this for
         </Text>
         <Text style={StyleSheet.compose(textStyle.body, styles.answer)}>
-          insert time
+          14 days
         </Text>
         <View style={styles.row}>
           <Text style={StyleSheet.compose(textStyle.body, styles.prompt)}>
             Location Access:
           </Text>
           <Text style={StyleSheet.compose(textStyle.body, styles.answer)}>
-            PREFERENCE
+            {locationEnabled.toString() ?? "false"}
           </Text>
         </View>
         <View style={styles.row}>
@@ -50,7 +56,7 @@ export default function Home() {
             Spotify Integration:
           </Text>
           <Text style={StyleSheet.compose(textStyle.body, styles.answer)}>
-            PREFERENCE
+            {spotifyEnabled.toString() ?? "false"}
           </Text>
         </View>
         <View style={styles.row}>
@@ -58,7 +64,7 @@ export default function Home() {
             Last Report Sent Out:
           </Text>
           <Text style={StyleSheet.compose(textStyle.body, styles.answer)}>
-            PREFERENCE
+            a week ago
           </Text>
         </View>
         <Button

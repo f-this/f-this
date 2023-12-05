@@ -3,11 +3,17 @@ import textStyle from "../../constants/textStyles";
 import Colors from "../../constants/Colors";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Svg, Path } from "react-native-svg";
+import { useProf } from "../../lib/profile_ctx";
 
 interface profileHeaderProps {
-  name?: string;
+  random?: string;
 }
 export default function profileHeader(props: profileHeaderProps) {
+  const { name } = useProf();
+  let real = "John Doe";
+  if (name != "" && name) {
+    real = name;
+  }
   return (
     <View>
       <SafeAreaView
@@ -28,7 +34,7 @@ export default function profileHeader(props: profileHeaderProps) {
               alignSelf: "center",
             })}
           >
-            {props.name ?? "NAME"}
+            {real}
           </Text>
           <Text
             style={StyleSheet.compose(textStyle.body, {

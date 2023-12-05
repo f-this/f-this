@@ -7,10 +7,17 @@ import textStyle from "../../../constants/textStyles";
 import Colors from "../../../constants/Colors";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { InfoCircle, Refresh } from "iconoir-react-native";
+import { useProf } from "../../../lib/profile_ctx";
 
 export default function Home() {
+  const { interests } = useProf();
   const [selected, setSelected] = React.useState<string[]>([]);
-
+  let customInterest = "Eating dark chocolate";
+  if (interests) {
+    if (interests[0] != "") {
+      customInterest = interests[0];
+    }
+  }
   return (
     <View
       style={{
@@ -63,7 +70,7 @@ export default function Home() {
             </View>
             <Button
               title="Chewing Gum"
-              onPress={() => { }}
+              onPress={() => {}}
               color="pink"
               textColor="white"
             />
@@ -124,8 +131,8 @@ export default function Home() {
             </View>
 
             <Button
-              title="Eating Dark Chocolate"
-              onPress={() => { }}
+              title={customInterest}
+              onPress={() => {}}
               color="purple"
               textColor="white"
             />

@@ -17,7 +17,7 @@ export default function profileHeader(props: profileHeaderProps) {
         }}
       >
         {/*Row that contains the logo and the progress bar*/}
-        <View style={{ width: "100%" }}>
+        <View style={{ width: "100%", paddingTop: 30 }}>
           <Image
             style={styles.image}
             source={require("../../assets/images/Ellipse.png")}
@@ -35,6 +35,7 @@ export default function profileHeader(props: profileHeaderProps) {
               fontSize: 18,
               alignSelf: "center",
               marginHorizontal: 20,
+              marginBottom: 10,
             })}
           >
             Are you actually making progress? Or is it all just talk?

@@ -26,11 +26,9 @@ export default function ButtonGroup() {
       <View
         style={{
           marginTop: 10,
-          backgroundColor: Colors.white,
           height: 35,
           width: "100%",
           justifyContent: "center",
-          ...(shadow as any),
         }}
       >
         <Text

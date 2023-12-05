@@ -18,6 +18,7 @@ interface ButtonProps {
   disabled?: boolean;
   height?: number;
   marginTop?: number;
+  style?: any;
 }
 
 export default function Button(props: ButtonProps) {
@@ -56,11 +57,14 @@ export default function Button(props: ButtonProps) {
       ? Colors.disabled
       : Colors[props.color ?? "white"],
     marginTop: props.marginTop,
+    ...props.style,
   });
   // Update textColor to be the textColor prop if it exists, otherwise use the default color
   let textStyle = StyleSheet.compose(styles.buttonText, {
     color: props.disabled ? Colors.white : Colors[props.textColor ?? "black"],
     height: props.height,
+    flex: 1,
+    textAlign: "center",
   });
 
   return (
@@ -92,6 +96,5 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "900",
     fontStyle: "italic",
-    paddingLeft: 10,
   },
 });

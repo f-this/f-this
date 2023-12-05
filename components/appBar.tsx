@@ -8,6 +8,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { router, useGlobalSearchParams, usePathname } from "expo-router";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useAuth } from "../lib/auth_ctx";
+import { BlurView } from "expo-blur";
 
 export default function appBar() {
   const pathname = usePathname();
@@ -22,92 +23,90 @@ export default function appBar() {
 
 
   return (
-    <View >
-      <SafeAreaView
-        edges={["bottom"]}
+    <BlurView
+      style={{
+        paddingHorizontal: 34,
+        paddingBottom: 20,
+        position: "absolute",
+        bottom: 0,
+        left: 0,
+        right: 0,
+      }}
+      intensity={80} tint="light"
+    >
+      {/*Row that contains app bar*/}
+      {/*If show is true, show the app bar*/}
+
+      <View
         style={{
-          backgroundColor: Colors.white,
-          opacity: 0.98,
-          paddingHorizontal: 34,
-          position: "absolute",
-          top: -100,
-          width: "100%"
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-between",
+          paddingHorizontal: 15,
+          marginTop: 20,
+          marginBottom: 20,
+          width: "100%",
         }}
       >
-        {/*Row that contains app bar*/}
-        {/*If show is true, show the app bar*/}
+        {home ? (
+          <HomeAltSlimHoriz
+            color={Colors.black}
+            width={30}
+            height={30}
+            strokeWidth={3}
+          />
+        ) : (
+          <TouchableOpacity onPress={() => { router.push("/") }}>
 
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
-            paddingHorizontal: 15,
-            marginTop: 20,
-            marginBottom: 20,
-            width: "100%",
-          }}
-        >
-          {home ? (
             <HomeAltSlimHoriz
-              color={Colors.black}
+              color={"gray"}
               width={30}
               height={30}
               strokeWidth={3}
             />
-          ) : (
-            <TouchableOpacity onPress={() => { router.push("/") }}>
-
-              <HomeAltSlimHoriz
-                color={"gray"}
-                width={30}
-                height={30}
-                strokeWidth={3}
-              />
-            </TouchableOpacity>
-          )}
-          {addiction ? (
+          </TouchableOpacity>
+        )}
+        {addiction ? (
+          <Logo
+            style={{
+              height: 20,
+              width: 35,
+            }}
+            color={"black"}
+          />
+        ) : (
+          <TouchableOpacity onPress={() => { router.push("/add-addiction?hideAppBar=true") }}>
             <Logo
               style={{
                 height: 20,
                 width: 35,
               }}
-              color={"black"}
-            />
-          ) : (
-            <TouchableOpacity onPress={() => { router.push("/add-addiction?hideAppBar=true") }}>
-              <Logo
-                style={{
-                  height: 20,
-                  width: 35,
-                }}
-                color={"gray"}
-              /></TouchableOpacity>
+              color={"gray"}
+            /></TouchableOpacity>
 
-          )}
-          {profile ? (
+        )}
+        {profile ? (
+          <ProfileCircle
+            color={Colors.black}
+            width={30}
+            height={30}
+            strokeWidth={3}
+          />
+        ) : (
+          <TouchableOpacity onPress={() => { router.push("/profile") }} onLongPress={
+            () => {
+              auth.signOut();
+            }}>
             <ProfileCircle
-              color={Colors.black}
+              color={"gray"}
               width={30}
               height={30}
               strokeWidth={3}
             />
-          ) : (
-            <TouchableOpacity onPress={() => { router.push("/profile") }} onLongPress={
-              () => {
-                auth.signOut();
-              }}>
-              <ProfileCircle
-                color={"gray"}
-                width={30}
-                height={30}
-                strokeWidth={3}
-              />
-            </TouchableOpacity>
-          )}
+          </TouchableOpacity>
+        )}
 
-        </View>
-      </SafeAreaView>
-    </View>
+      </View>
+    </BlurView>
   );
 }

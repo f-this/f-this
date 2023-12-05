@@ -16,8 +16,8 @@ export default function DashboardHeader() {
     let subtitle2Array = [
         `Progress report, ${name}—show me the hustle.`,
         `How's the conquest going, ${name}?`,
-        `To infinity, ${name}!`,
-        `Houston, we have progress.`,
+        `To infinity and beyond, ${name}!`,
+        `Houston, we have progress, ${name}.`,
         `Ready for a progress power-up, ${name}?`,
         `Since you've been gone, ${name}, let's catch up on progress.`,
         `Drop it like it's hot, ${name}, then let's check on your progress.`,

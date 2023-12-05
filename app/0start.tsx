@@ -26,7 +26,7 @@ export default function Home() {
               title="I Already Have An Account"
               onPress={() => {
                 //router.push("/add-addiction");
-                router.push("/generate-report/reporting-duty");
+                router.push("/7phone");
               }}
             />
           </View>

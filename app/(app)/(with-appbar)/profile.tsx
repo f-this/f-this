@@ -1,15 +1,15 @@
 import { View, Text, Image } from "react-native";
 import { StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import Header from "../../components/profile/header";
-import Button from "../../components/button";
-import TextButton from "../../components/textButton";
+import Header from "../../../components/profile/header";
+import Button from "../../../components/button";
+import TextButton from "../../../components/textButton";
 import { router } from "expo-router";
-import { useAuth } from "../../lib/auth_ctx";
-import Colors from "../../constants/Colors";
-import textStyle from "../../constants/textStyles";
+import { useAuth } from "../../../lib/auth_ctx";
+import Colors from "../../../constants/Colors";
+import textStyle from "../../../constants/textStyles";
 import { Bold, Safe } from "iconoir-react-native";
-import AppBar from "../../components/appBar";
+import AppBar from "../../../components/appBar";
 
 export default function Home() {
   return (

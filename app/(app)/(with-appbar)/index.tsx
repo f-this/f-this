@@ -1,12 +1,12 @@
 import { ScrollView, View, Text, StyleSheet } from "react-native";
 import React from "react";
-import Colors from "../../constants/Colors";
+import Colors from "../../../constants/Colors";
 import Svg, { Path } from "react-native-svg";
-import Streak from "../../components/dashboard/streak";
-import Checkup from "../../components/dashboard/daily-checkup";
-import ButtonGroup from "../../components/dashboard/button-group";
-import DashboardHeader from "../../components/dashboard/header";
-import Milestones from "../../components/dashboard/milestones";
+import Streak from "../../../components/dashboard/streak";
+import Checkup from "../../../components/dashboard/daily-checkup";
+import ButtonGroup from "../../../components/dashboard/button-group";
+import DashboardHeader from "../../../components/dashboard/header";
+import Milestones from "../../../components/dashboard/milestones";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Home() {

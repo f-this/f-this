@@ -19,7 +19,6 @@ interface dropdownProps {
 }
 
 export default function Dropdown(props: dropdownProps) {
-
   let [selected, setSelected] = React.useState<string[]>([]);
 
   // Update textColor to be the textColor prop if it exists, otherwise use the default color
@@ -29,7 +28,6 @@ export default function Dropdown(props: dropdownProps) {
 
   return (
     <View style={styles.container as any}>
-
       <FlatList
         style={styles.scrollView}
         contentContainerStyle={styles.scrollContent}
@@ -52,16 +50,21 @@ export default function Dropdown(props: dropdownProps) {
                 }
                 props.onMultiselect(selectedNew);
               } else {
+                setSelected([item]);
                 props.onPress(item);
               }
             }}
           >
             <Text style={textStyle}>{item}</Text>
-            {props.onMultiselect && <CheckboxNoState initialState={selected.includes(item)} onPress={() => { }} />}
+            {props.onMultiselect && (
+              <CheckboxNoState
+                initialState={selected.includes(item)}
+                onPress={() => {}}
+              />
+            )}
           </TouchableOpacity>
         )}
       />
-
     </View>
   );
 }
@@ -71,7 +74,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "center",
     backgroundColor: Colors.white,
-    ...shadow
+    ...shadow,
   },
   button: {
     borderWidth: 1,

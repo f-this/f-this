@@ -8,8 +8,20 @@ import Dropdown from "../components/dropdown";
 import FabButton from "../components/fab";
 import { ArrowRight } from "iconoir-react-native";
 import textStyle from "../constants/textStyles";
+import { useProf } from "../lib/profile_ctx"; // Update the path
 
 export default function Home() {
+  const { storeLocal } = useProf();
+  const [interests, setInterests] = React.useState([""]);
+  const handleInterestChange = (text: string[]) => {
+    setInterests(text);
+  };
+
+  const handleConfirm = () => {
+    storeLocal({ interests: interests });
+    router.push("/4spotify");
+  };
+
   return (
     <View>
       <Header

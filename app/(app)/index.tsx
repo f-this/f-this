@@ -1,5 +1,6 @@
 import { View, ScrollView } from "react-native";
 import { StyleSheet } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import React from "react";
 import Colors from "../../constants/Colors";
 import Svg, { Path } from "react-native-svg";

@@ -6,7 +6,16 @@ import TextBoxInput from "../components/textBox";
 import { useProf } from "../lib/profile_ctx"; // Update the path
 
 export default function Home() {
-  const { age } = useProf();
+  const { storeLocal } = useProf();
+  const [name, setName] = React.useState("");
+  const handleNameChange = (text: string) => {
+    setName(text);
+  };
+
+  const handleConfirm = () => {
+    storeLocal({ name: name });
+    router.push("/3interests");
+  };
   return (
     <View>
       <Header
@@ -22,10 +31,8 @@ export default function Home() {
             <TextBoxInput
               placeholder="Enter your name"
               keyboardType="default"
-              onConfirm={() => {
-                console.log(age);
-                router.push("/3interests");
-              }}
+              onChange={handleNameChange}
+              onConfirm={handleConfirm}
             />
           </View>
         }

@@ -4,6 +4,7 @@ import Button from "../components/button";
 import TextButton from "../components/textButton";
 import { router } from "expo-router";
 import React from "react";
+import { useProf } from "../lib/profile_ctx";
 
 export default function Home() {
   return (

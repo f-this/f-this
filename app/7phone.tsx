@@ -7,10 +7,12 @@ import PhoneNumberInput from "../components/textBoxPhone";
 import { ArrowRight } from "iconoir-react-native";
 import FabButton from "../components/fab";
 import { useAuth } from "../lib/auth_ctx";
+import { useProf } from "../lib/profile_ctx";
 
 export default function Home() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const { signIn } = useAuth();
+  const { storeLocal } = useProf();
 
   return (
     <View>
@@ -34,6 +36,7 @@ export default function Home() {
               <FabButton
                 onPress={async () => {
                   const { data } = await signIn(phoneNumber);
+                  storeLocal({ phone: phoneNumber });
                   router.push("/8otp");
                 }}
               >

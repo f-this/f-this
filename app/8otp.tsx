@@ -6,10 +6,20 @@ import VerificationCodeInput from "../components/textBoxVerificationCode";
 import TextButton from "../components/textButton";
 import { useState } from "react";
 import { useAuth } from "../lib/auth_ctx";
+import { useProf } from "../lib/profile_ctx";
 
 export default function Home() {
   const [OTP, setOTP] = useState("");
   const { phone, verifyOTP } = useAuth();
+  const {
+    spotifyEnabled,
+    notificationsEnabled,
+    locationEnabled,
+    interests,
+    age,
+    name,
+    updateUserProfile,
+  } = useProf();
 
   const onLogin = async (code: string) => {
     if (phone) {
@@ -19,6 +29,15 @@ export default function Home() {
         type: "sms",
       });
       if (!result.error) {
+        updateUserProfile({
+          spotifyEnabled: spotifyEnabled,
+          age: age,
+          name: name,
+          notificationsEnabled: notificationsEnabled,
+          locationEnabled: locationEnabled,
+          interests: interests,
+          phone: phone,
+        });
         router.push("/");
         console.log("success");
       } else {

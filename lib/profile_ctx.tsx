@@ -14,6 +14,7 @@ interface UserContextData {
   userProfile: User | null;
   storeLocal: (data: Partial<UserContextData>) => void;
   updateUserProfile: (data: Partial<UserContextData>) => Promise<any>;
+  fetchUserProfile: (data: Partial<UserContextData>) => Promise<any>;
 }
 
 interface ProfileContextProps {
@@ -39,10 +40,11 @@ export const ProfileProvider: React.FC<ProfileContextProps> = ({
 
   useEffect(() => {
     // get session data if there is an active session
-    supabase.auth.getUser().then((res) => {
+    (async () => {
+      const res = await supabase.auth.getUser();
       setUserProfile(res.data.user ?? null);
       setLoading(false);
-    });
+    })();
 
     // listen for changes to auth
     const { data: listener } = supabase.auth.onAuthStateChange(
@@ -68,6 +70,25 @@ export const ProfileProvider: React.FC<ProfileContextProps> = ({
     notificationsEnabled,
     age,
     userProfile,
+    fetchUserProfile: async () => {
+      const { data: user, data: id, error } = await supabase.auth.getUser();
+
+      if (user) {
+        const { data, error } = await supabase
+          .from("users")
+          .select("*")
+          .eq("id", id)
+          .single();
+
+        if (data) {
+          setUserProfile(data);
+        } else {
+          console.error("Error fetching user profile:", error);
+        }
+      }
+
+      setLoading(false);
+    },
     storeLocal: (data: Partial<UserContextData>) => {
       if (data.age) {
         setAge(data.age);

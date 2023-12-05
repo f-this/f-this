@@ -1,7 +1,9 @@
 import { Redirect, Stack } from 'expo-router';
 import { useAuth } from '../../lib/auth_ctx';
-import { Text } from 'react-native';
+import { Text, View } from 'react-native';
 import React from 'react';
+import AppBar from '../../components/appBar';
+import { BlurView } from 'expo-blur';
 
 export default function AppLayout() {
     const auth = useAuth();
@@ -21,5 +23,10 @@ export default function AppLayout() {
     }
 
     // This layout can be deferred because it's not the root layout.
-    return <Stack screenOptions={{ header: () => null }} />;
+    return <View style={{ flex: 1, flexDirection: "column" }}>
+        <Stack screenOptions={{ header: () => null }} />
+        <BlurView intensity={100} >
+            <AppBar />
+        </BlurView>
+    </View>;
 }

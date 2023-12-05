@@ -6,7 +6,7 @@ const textStyle = StyleSheet.create({
     fontStyle: "italic",
     fontSize: 50,
     fontWeight: "bold",
-    letterSpacing: -2.5,
+    letterSpacing: -2.75,
     color: Colors.white,
   },
   subtitle: {

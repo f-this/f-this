@@ -59,7 +59,7 @@ export function CheckboxNoState(props: checkboxProps) {
 
         <View style={styles.checkbox as any}>
             {props.initialState && <View style={checkboxStyle}>
-                <Check width={20} height={20} color={"#000"} strokeWidth={5} />
+                <Check width={20} height={20} color={"#000"} strokeWidth={3} />
             </View>}
         </View>
     );
@@ -78,7 +78,8 @@ const styles = {
 
         borderStyle: "solid",
         borderColor: "#000",
-        borderWidth: 5,
+        backgroundColor: Colors.white,
+        borderWidth: 3,
     },
     checkboxSelected: {
         width: 22,

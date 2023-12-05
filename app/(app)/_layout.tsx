@@ -23,10 +23,5 @@ export default function AppLayout() {
     }
 
     // This layout can be deferred because it's not the root layout.
-    return <View style={{ flex: 1, flexDirection: "column" }}>
-        <Stack screenOptions={{ header: () => null }} />
-        <BlurView intensity={100} >
-            <AppBar />
-        </BlurView>
-    </View>;
+    return <Stack screenOptions={{ header: () => null }} />
 }

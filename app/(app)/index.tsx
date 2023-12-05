@@ -7,6 +7,8 @@ import Streak from "../../components/dashboard/streak";
 import Checkup from "../../components/dashboard/daily-checkup";
 import ButtonGroup from "../../components/dashboard/button-group";
 import DashboardHeader from "../../components/dashboard/header";
+import Milestones from "../../components/dashboard/milestones";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Home() {
     return (
@@ -39,7 +41,11 @@ export default function Home() {
             <ScrollView>
                 <Checkup />
                 <ButtonGroup />
+                <Milestones />
+                {/**Extra Padding for the app bar */}
+                <View style={{ height: 120 }} />
             </ScrollView>
+
         </View >
     );
 }

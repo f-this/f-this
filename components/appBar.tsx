@@ -1,91 +1,109 @@
 import React from "react";
-import { View, SafeAreaView } from "react-native";
-import Svg, { Path } from "react-native-svg";
+import { View } from "react-native";
 import Colors from "../constants/Colors";
 import Logo from "./logo";
 import { HomeAltSlimHoriz } from "iconoir-react-native";
 import { ProfileCircle } from "iconoir-react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { router, useGlobalSearchParams, usePathname } from "expo-router";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
-interface appBarProps {
-  color?: keyof typeof Colors;
-  show?: boolean;
-  home?: boolean;
-  addiction?: boolean;
-  profile?: boolean;
-}
+export default function appBar() {
+  const pathname = usePathname();
+  const params = useGlobalSearchParams();
 
-export default function appBar(props: appBarProps) {
+  if (params.hideAppBar) return (<View></View>);
+
+  console.log(pathname);
+
+  let home = pathname === "/";
+  let addiction = pathname === "/addiction";
+  let profile = pathname === "/profile";
+
+
   return (
-    <View>
+    <View >
       <SafeAreaView
+        edges={["bottom"]}
         style={{
-          backgroundColor: Colors[props.color ?? "white"],
+          backgroundColor: Colors.white,
+          opacity: 0.98,
           paddingHorizontal: 34,
+          position: "absolute",
+          top: -100,
+          width: "100%"
         }}
       >
         {/*Row that contains app bar*/}
         {/*If show is true, show the app bar*/}
-        {props.show && (
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-between",
-              paddingHorizontal: 15,
-              marginTop: 20,
-              marginBottom: 20,
-              width: "100%",
-            }}
-          >
-            {props.home ? (
-              <HomeAltSlimHoriz
-                color={Colors.black}
-                width={30}
-                height={30}
-                strokeWidth={3}
-              />
-            ) : (
+
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
+            paddingHorizontal: 15,
+            marginTop: 20,
+            marginBottom: 20,
+            width: "100%",
+          }}
+        >
+          {home ? (
+            <HomeAltSlimHoriz
+              color={Colors.black}
+              width={30}
+              height={30}
+              strokeWidth={3}
+            />
+          ) : (
+            <TouchableOpacity onPress={() => { router.push("/") }}>
+
               <HomeAltSlimHoriz
                 color={"gray"}
                 width={30}
                 height={30}
                 strokeWidth={3}
               />
-            )}
-            {props.addiction ? (
+            </TouchableOpacity>
+          )}
+          {addiction ? (
+            <Logo
+              style={{
+                height: 20,
+                width: 35,
+              }}
+              color={"black"}
+            />
+          ) : (
+            <TouchableOpacity onPress={() => { router.push("/add-addiction?hideAppBar=true") }}>
               <Logo
                 style={{
                   height: 20,
                   width: 35,
                 }}
-                color={"black"}
-              />
-            ) : (
-              <Logo
-                style={{
-                  height: 20,
-                  width: 35,
-                }}
                 color={"gray"}
-              />
-            )}
-            {props.profile ? (
-              <ProfileCircle
-                color={Colors.black}
-                width={30}
-                height={30}
-                strokeWidth={3}
-              />
-            ) : (
+              /></TouchableOpacity>
+
+          )}
+          {profile ? (
+            <ProfileCircle
+              color={Colors.black}
+              width={30}
+              height={30}
+              strokeWidth={3}
+            />
+          ) : (
+            <TouchableOpacity onPress={() => { router.push("/profile") }}>
               <ProfileCircle
                 color={"gray"}
                 width={30}
                 height={30}
                 strokeWidth={3}
               />
-            )}
-          </View>
-        )}
+            </TouchableOpacity>
+          )}
+
+        </View>
       </SafeAreaView>
     </View>
   );

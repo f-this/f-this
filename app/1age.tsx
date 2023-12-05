@@ -1,13 +1,26 @@
 import { View, Text } from "react-native";
+import { useState, useContext } from "react";
 import Header from "../components/header";
 import { router } from "expo-router";
 import React from "react";
 import TextBoxInput from "../components/textBox";
 import FabButton from "../components/fab";
 import * as Iconoir from "iconoir-react-native";
-import ContactButton from "../components/contactButton";
+import { useProf } from "../lib/profile_ctx"; // Update the path
 
 export default function Home() {
+  const { storeLocal } = useProf();
+  const [age, setAge] = useState("");
+  const handleAgeChange = (text: string) => {
+    // Add any age validation logic here
+    setAge(text);
+  };
+
+  const handleConfirm = () => {
+    // Add age validation logic if needed
+    storeLocal({ age: age });
+    router.push("/2name");
+  };
   return (
     <View>
       <Header
@@ -22,9 +35,8 @@ export default function Home() {
             <TextBoxInput
               placeholder="Enter an age"
               keyboardType="number-pad"
-              onConfirm={() => {
-                router.push("/2name");
-              }}
+              onChange={handleAgeChange}
+              onConfirm={handleConfirm}
             />
           </View>
         }

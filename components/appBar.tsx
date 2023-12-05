@@ -14,8 +14,6 @@ export default function appBar() {
 
   if (params.hideAppBar) return (<View></View>);
 
-  console.log(pathname);
-
   let home = pathname === "/";
   let addiction = pathname === "/addiction";
   let profile = pathname === "/profile";

@@ -39,12 +39,7 @@ export default function Home() {
           phone: phone,
         });
         router.push("/");
-        console.log("success");
-      } else {
-        console.log(result.error);
       }
-    } else {
-      console.log("no phone");
     }
   };
 
@@ -71,7 +66,9 @@ export default function Home() {
             />
             <TextButton
               title="Resend Verification Code"
-              onPress={() => console.log("resent")}
+              onPress={() => {
+                router.push("/7phone");
+              }}
             />
           </View>
         }

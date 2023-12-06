@@ -4,8 +4,10 @@ import Logo from "../logo";
 import Colors from "../../constants/Colors";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useProf } from "../../lib/profile_ctx";
+import { useAuth } from "../../lib/auth_ctx";
 
 export default function DashboardHeader() {
+  const { signOut } = useAuth();
   const { name } = useProf();
   let real = "John Doe";
   if (name != "" && name) {

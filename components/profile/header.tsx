@@ -4,12 +4,15 @@ import Colors from "../../constants/Colors";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Svg, Path } from "react-native-svg";
 import { useProf } from "../../lib/profile_ctx";
-
+import { useAuth } from "../../lib/auth_ctx";
+import TextButton from "../textButton";
 interface profileHeaderProps {
   random?: string;
 }
 export default function profileHeader(props: profileHeaderProps) {
-  const { name } = useProf();
+  const { signOut } = useAuth();
+
+  const { id, name, fetchUserProfile } = useProf();
   let real = "John Doe";
   if (name != "" && name) {
     real = name;
@@ -22,6 +25,14 @@ export default function profileHeader(props: profileHeaderProps) {
           backgroundColor: Colors.black,
         }}
       >
+        <TextButton
+          style={{
+            marginLeft: 320,
+          }}
+          title="Sign Out"
+          textColor="white"
+          onPress={signOut}
+        />
         {/*Row that contains the logo and the progress bar*/}
         <View style={{ width: "100%", paddingTop: 30 }}>
           <Image

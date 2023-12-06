@@ -1,4 +1,10 @@
-import { View, Text, Image, KeyboardAvoidingView, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  KeyboardAvoidingView,
+  ScrollView,
+} from "react-native";
 import { StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Header from "../../../components/profile/header";
@@ -13,10 +19,17 @@ import AppBar from "../../../components/appBar";
 import { useProf } from "../../../lib/profile_ctx";
 
 export default function Home() {
-  const { addiction, locationEnabled, spotifyEnabled } = useProf();
+  const {
+    addiction,
+    alternative,
+    locationEnabled,
+    spotifyEnabled,
+    updateUserProfile,
+  } = useProf();
+  updateUserProfile({ addiction: addiction, alternative: alternative });
 
   return (
-    <ScrollView >
+    <ScrollView>
       <KeyboardAvoidingView behavior={"padding"}>
         <Header />
         <View style={{ marginLeft: 40, marginRight: 40, marginBottom: 100 }}>
@@ -33,14 +46,22 @@ export default function Home() {
             You are currently working on quitting
           </Text>
           <Text style={StyleSheet.compose(textStyle.body, styles.answer)}>
-            {addiction ? addiction : "Unknown"}
+            {addiction ? addiction : "Select an addiction"}
           </Text>
           <Text style={StyleSheet.compose(textStyle.body, styles.prompt)}>
-            You have been working on this for
+            You last chose the alternative of
           </Text>
           <Text style={StyleSheet.compose(textStyle.body, styles.answer)}>
-            14 days
+            {alternative ? alternative : "Choose your first alternative"}{" "}
           </Text>
+          <View style={styles.row}>
+            <Text style={StyleSheet.compose(textStyle.body, styles.prompt)}>
+              You have been working on this for
+            </Text>
+            <Text style={StyleSheet.compose(textStyle.body, styles.answer)}>
+              14 days
+            </Text>
+          </View>
           <View style={styles.row}>
             <Text style={StyleSheet.compose(textStyle.body, styles.prompt)}>
               Location Access:
@@ -73,7 +94,6 @@ export default function Home() {
             marginTop={30}
           />
         </View>
-
       </KeyboardAvoidingView>
     </ScrollView>
   );

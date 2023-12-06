@@ -7,6 +7,7 @@ interface ButtonProps {
   onPress: () => void;
   color?: keyof typeof Colors;
   textColor?: keyof typeof Colors;
+  style?: any;
 }
 
 export default function TextButton(props: ButtonProps) {
@@ -16,7 +17,10 @@ export default function TextButton(props: ButtonProps) {
   });
 
   return (
-    <TouchableOpacity style={styles.button} onPress={props.onPress}>
+    <TouchableOpacity
+      style={StyleSheet.compose(styles.button, { ...props.style })}
+      onPress={props.onPress}
+    >
       <Text style={textStyle}>{props.title}</Text>
     </TouchableOpacity>
   );

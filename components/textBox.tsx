@@ -22,6 +22,7 @@ interface textBoxProps {
   height?: number;
   width?: number;
   onConfirm?: (text: string) => void;
+  disabled?: boolean;
 }
 
 const TextBoxInput: React.FC<textBoxProps> = (props: textBoxProps) => {
@@ -53,8 +54,12 @@ const TextBoxInput: React.FC<textBoxProps> = (props: textBoxProps) => {
           />
         </View>
       </View>
-      {props.onConfirm && inputText && (
-        <FabButton onPress={() => { props.onConfirm && props.onConfirm(inputText) }}>
+      {props.onConfirm && inputText && !props.disabled && (
+        <FabButton
+          onPress={() => {
+            props.onConfirm && props.onConfirm(inputText);
+          }}
+        >
           <ArrowRight color="black" width={30} height={30} strokeWidth={2} />
         </FabButton>
       )}

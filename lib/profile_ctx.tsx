@@ -13,9 +13,10 @@ export interface UserContextData {
   age: string | null;
   userProfile: User | null;
   addiction: string | null;
+  alternative: string | null;
   storeLocal: (data: Partial<UserContextData>) => void;
   updateUserProfile: (data: Partial<UserContextData>) => Promise<any>;
-  fetchUserProfile: (data: Partial<UserContextData>) => Promise<any>;
+  fetchUserProfile: () => Promise<any>;
 }
 
 interface ProfileContextProps {
@@ -34,6 +35,7 @@ export const ProfileProvider: React.FC<ProfileContextProps> = ({
   const [phone, setPhone] = useState("");
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
+  const [alternative, setAlternative] = useState("");
   const [addiction, setAddiction] = useState("");
   const [interests, setInterests] = useState([""]);
   const [locationEnabled, setLocationEnabled] = useState(false);
@@ -63,7 +65,7 @@ export const ProfileProvider: React.FC<ProfileContextProps> = ({
   }, []);
 
   const value = {
-    id: userProfile?.id || "",
+    id: userProfile?.id || null,
     phone,
     name,
     interests,
@@ -73,21 +75,32 @@ export const ProfileProvider: React.FC<ProfileContextProps> = ({
     age,
     userProfile,
     addiction,
+    alternative,
     fetchUserProfile: async () => {
-      const { data: user, data: id, error } = await supabase.auth.getUser();
+      try {
+        const {
+          data: { user },
+          error,
+        } = await supabase.auth.getUser();
 
-      if (user) {
-        const { data, error } = await supabase
-          .from("users")
-          .select("*")
-          .eq("id", id)
-          .single();
+        if (user) {
+          const { data, error } = await supabase
+            .from("users")
+            .select("*")
+            .eq("id", user.id)
+            .single();
 
-        if (data) {
-          setUserProfile(data);
+          if (data) {
+            setUserProfile(data);
+            console.log(data);
+          } else {
+            console.error("Error fetching user profile: No data found");
+          }
         } else {
-          console.error("Error fetching user profile:", error);
+          console.error("No user data available.");
         }
+      } catch (error) {
+        console.error("Error fetching user profile:", error);
       }
 
       setLoading(false);
@@ -117,6 +130,9 @@ export const ProfileProvider: React.FC<ProfileContextProps> = ({
       if (data.addiction) {
         setAddiction(data.addiction);
       }
+      if (data.alternative) {
+        setAlternative(data.alternative);
+      }
       console.log("Storing local data:", data);
     },
     updateUserProfile: async (data: Partial<UserContextData>) => {
@@ -135,7 +151,8 @@ export const ProfileProvider: React.FC<ProfileContextProps> = ({
           };
           const { error } = await supabase
             .from("users")
-            .update(updateData).eq("id", (userProfile ? userProfile.id : fallbackUser?.id));
+            .update(updateData)
+            .eq("id", userProfile ? userProfile.id : fallbackUser?.id);
           if (error) {
             console.error("Error updating user profile:", error);
           }

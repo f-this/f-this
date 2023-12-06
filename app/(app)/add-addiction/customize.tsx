@@ -1,13 +1,17 @@
 import { View, Text, KeyboardAvoidingView, ScrollView } from "react-native";
 import Header from "../../../components/header";
 import { router } from "expo-router";
+import { useState } from "react";
 import Button from "../../../components/button";
 import TextBoxInput from "../../../components/textBox";
 import textStyle from "../../../constants/textStyles";
 import Colors from "../../../constants/Colors";
+import { useProf } from "../../../lib/profile_ctx";
 export default function Home() {
+  const { storeLocal } = useProf();
+  const [custom, setCustom] = useState("");
   return (
-    <ScrollView >
+    <ScrollView>
       <KeyboardAvoidingView behavior={"padding"}>
         <Header
           showLogo
@@ -20,9 +24,10 @@ export default function Home() {
           <TextBoxInput
             placeholder="Enter your alternative habit"
             keyboardType="default"
-            onConfirm={() => {
-              router.push("/3interests");
+            onChange={(text) => {
+              setCustom(text);
             }}
+            disabled={true}
           />
           <Text
             style={[
@@ -39,12 +44,13 @@ export default function Home() {
               color="orange"
               textColor="white"
               onPress={() => {
-                router.push("/1age");
+                storeLocal({ alternative: custom });
+                router.push("/profile");
               }}
             />
           </View>
         </View>
       </KeyboardAvoidingView>
-    </ScrollView >
+    </ScrollView>
   );
 }

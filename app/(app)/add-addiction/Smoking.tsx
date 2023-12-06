@@ -11,6 +11,8 @@ import { useProf } from "../../../lib/profile_ctx";
 
 export default function Home() {
   const { interests } = useProf();
+  const { storeLocal } = useProf();
+  const [custom, setCustom] = React.useState("");
   const [selected, setSelected] = React.useState<string[]>([]);
   let customInterest = "Eating dark chocolate";
   if (interests) {
@@ -19,7 +21,7 @@ export default function Home() {
     }
   }
   return (
-    <ScrollView >
+    <ScrollView>
       <KeyboardAvoidingView behavior={"padding"}>
         <View
           style={{
@@ -43,7 +45,10 @@ export default function Home() {
                 }}
               >
                 <View
-                  style={{ flexDirection: "row", justifyContent: "space-between" }}
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                  }}
                 >
                   <Text
                     style={[
@@ -72,7 +77,10 @@ export default function Home() {
                 </View>
                 <Button
                   title="Chewing Gum"
-                  onPress={() => { }}
+                  onPress={() => {
+                    storeLocal({ alternative: "Chewing Gum" });
+                    router.push("/profile");
+                  }}
                   color="pink"
                   textColor="white"
                 />
@@ -80,7 +88,10 @@ export default function Home() {
                 <View style={{ height: 15 }} />
 
                 <View
-                  style={{ flexDirection: "row", justifyContent: "space-between" }}
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                  }}
                 >
                   <Text
                     style={[
@@ -134,7 +145,10 @@ export default function Home() {
 
                 <Button
                   title={customInterest}
-                  onPress={() => { }}
+                  onPress={() => {
+                    storeLocal({ alternative: customInterest });
+                    router.push("/profile");
+                  }}
                   color="purple"
                   textColor="white"
                 />
@@ -165,6 +179,6 @@ export default function Home() {
           </View>
         </View>
       </KeyboardAvoidingView>
-    </ScrollView >
+    </ScrollView>
   );
 }

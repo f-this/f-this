@@ -11,7 +11,7 @@ import Animated, {
 import { useProf } from "../../lib/profile_ctx";
 
 export default function Checkup() {
-  const { addiction } = useProf();
+  const { addictionData } = useProf();
   let choice = "No habit yet to check up on! Select a habit to quit!";
 
   let smokingText =
@@ -22,13 +22,13 @@ export default function Checkup() {
     "Research shows that after 14 days without drugs you will start feeling less urges to do illicit subtances";
   let sugarText =
     "Research shows that after 14 days without sugar you will start feeling less sweet cravings";
-  if (addiction == "Smoking") {
+  if (addictionData?.addiction == "Smoking") {
     choice = smokingText;
-  } else if (addiction == "Gambling") {
+  } else if (addictionData?.addiction == "Gambling") {
     choice = gamblingText;
-  } else if (addiction == "Illicit") {
+  } else if (addictionData?.addiction == "Illicit") {
     choice = illicitText;
-  } else if (addiction == "Sugar") {
+  } else if (addictionData?.addiction == "Sugar") {
     choice = sugarText;
   }
   return (
@@ -37,8 +37,8 @@ export default function Checkup() {
         <Text style={styles.title}>Daily Check-Up</Text>
         <Text style={styles.body}>{choice}</Text>
         <View style={styles.buttonContainer}>
-          <SlimButton title="Fake News" onPress={() => {}} white />
-          <SlimButton title="OMG so real" onPress={() => {}} white={false} />
+          <SlimButton title="Fake News" onPress={() => { }} white />
+          <SlimButton title="OMG so real" onPress={() => { }} white={false} />
         </View>
       </View>
     </View>

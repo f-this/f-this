@@ -8,7 +8,7 @@ import Dropdown from "../../../components/dropdown";
 import { useProf, UserContextData } from "../../../lib/profile_ctx";
 
 export default function Home() {
-  const { storeLocal, updateUserProfile } = useProf();
+  const { storeLocal, storeLocalAddictionData } = useProf();
   const [selected, setSelected] = React.useState<string[]>([]);
   const [route, setRoute] = React.useState("");
   const handleMultiselect = useCallback((items: string[]) => {
@@ -21,7 +21,7 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    storeLocal({ addiction: selected[0] });
+    storeLocalAddictionData({ addiction: selected[0] });
     if (selected[0] == "Illicit Substances") {
       setRoute("Illicit");
     } else {

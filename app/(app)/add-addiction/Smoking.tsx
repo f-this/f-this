@@ -11,9 +11,7 @@ import { useProf } from "../../../lib/profile_ctx";
 
 export default function Home() {
   const { interests } = useProf();
-  const { storeLocal } = useProf();
-  const [custom, setCustom] = React.useState("");
-  const [selected, setSelected] = React.useState<string[]>([]);
+  const { storeLocalAddictionData } = useProf();
   let customInterest = "Eating dark chocolate";
   if (interests) {
     if (interests[0] != "") {
@@ -78,8 +76,8 @@ export default function Home() {
                 <Button
                   title="Chewing Gum"
                   onPress={() => {
-                    storeLocal({ alternative: "Chewing Gum" });
-                    router.push("/profile");
+                    storeLocalAddictionData({ alternative: "Chewing Gum" });
+                    router.push("/profile?push=true");
                   }}
                   color="pink"
                   textColor="white"
@@ -146,8 +144,8 @@ export default function Home() {
                 <Button
                   title={customInterest}
                   onPress={() => {
-                    storeLocal({ alternative: customInterest });
-                    router.push("/profile");
+                    storeLocalAddictionData({ alternative: customInterest });
+                    router.push("/profile?push=true");
                   }}
                   color="purple"
                   textColor="white"

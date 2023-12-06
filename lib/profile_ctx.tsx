@@ -4,11 +4,11 @@ import { User } from "@supabase/supabase-js";
 
 
 export interface UserAddictionData {
-  id: string;
-  addiction: string;
-  alternative: string;
-  createdAt: string;
-  days: () => number;
+  id?: string;
+  addiction?: string;
+  alternative?: string;
+  createdAt?: string;
+  days: () => string;
 }
 
 export interface UserContextData {
@@ -29,6 +29,7 @@ export interface UserContextData {
   addictionData: UserAddictionData | null;
   updateUserAddictionData: () => Promise<any>;
   fetchUserAddictionData: () => Promise<any>;
+  storeLocalAddictionData: (data: Partial<UserAddictionData>) => void;
 }
 
 
@@ -53,6 +54,7 @@ export const ProfileProvider: React.FC<ProfileContextProps> = ({
   const [spotifyEnabled, setSpotifyEnabled] = useState(false);
   const [notificationsEnabled, setNotificationsEnabled] = useState(false);
   let [createdAt, setCreatedAt] = useState<string | null>(null);
+  let loadingInt = false;
 
   const [userAddictionData, setUserAddictionData] = useState<UserAddictionData | null>(null);
 
@@ -78,6 +80,18 @@ export const ProfileProvider: React.FC<ProfileContextProps> = ({
     };
   }, []);
 
+  function calculateDays() {
+    if (userAddictionData?.createdAt) {
+      const date1 = new Date(userAddictionData?.createdAt);
+      const date2 = new Date();
+      const diffTime = Math.abs(date2.getTime() - date1.getTime());
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+      return diffDays.toString();
+    } else {
+      return "0";
+    }
+  }
+
   const value: UserContextData = {
     id: userProfile?.id || null,
     phone,
@@ -98,11 +112,13 @@ export const ProfileProvider: React.FC<ProfileContextProps> = ({
 
         if (user) {
           // Assuming that the 'id' field in the users table corresponds to the user ID
-          const { data, error } = await supabase
+          const { data } = await supabase
             .from("users")
             .select("*")
             .eq("id", user.id)
             .single();
+
+
 
           if (data) {
             setUserProfile(data);
@@ -114,7 +130,12 @@ export const ProfileProvider: React.FC<ProfileContextProps> = ({
             setNotificationsEnabled(data.notificationsEnabled);
             setLocationEnabled(data.locationEnabled);
             setCreatedAt(data.created_at);
+            setInterests(data.interests);
+
             console.log("Fetched data: " + JSON.stringify(data));
+
+            await value.fetchUserAddictionData();
+
           } else {
             console.error("Error fetching user profile: No data found");
           }
@@ -194,16 +215,62 @@ export const ProfileProvider: React.FC<ProfileContextProps> = ({
           error,
         } = await supabase.auth.getUser();
 
+        if (user && !loadingInt) {
+          loadingInt = true;
+          // Assuming that the 'id' field in the users table corresponds to the user ID
+          const submit = {
+            addiction: userAddictionData?.addiction,
+            alternative: userAddictionData?.alternative,
+            user_id: user.id,
+            id: userAddictionData?.id,
+          };
+
+          // Delete any null or undefined values
+          const cleanData = Object.fromEntries(
+            Object.entries(submit).filter(([_, v]) => v != null || v === user.id)
+          );
+
+          console.log("Submitting data: " + JSON.stringify(cleanData));
+          const { data, error } = await supabase
+            .from("user_addictions")
+            .upsert(cleanData)
+
+          if (error) {
+            console.error("Error updating user addiction data:", error);
+          }
+
+        } else {
+          console.log("No user data available or already loading.");
+        }
+
+        loadingInt = false;
+      } catch (error) {
+        console.error("Error fetching addiction data:", error);
+      }
+    },
+    fetchUserAddictionData: async () => {
+      try {
+        const {
+          data: { user },
+          error,
+        } = await supabase.auth.getUser();
+
         if (user) {
           // Assuming that the 'id' field in the users table corresponds to the user ID
           const { data, error } = await supabase
             .from("user_addictions")
-            .upsert({
-              addiction: userAddictionData?.addiction,
-              alternative: userAddictionData?.alternative,
-              user_id: user.id,
-              id: userAddictionData?.id,
+            .select("*")
+            .eq("user_id", user.id)
+
+          if (data) {
+            setUserAddictionData({
+              ...data[0],
+              days: calculateDays
             });
+            console.log("Fetched data: " + JSON.stringify(data));
+          } else {
+            console.error("Error fetching user profile: No data found");
+          }
         } else {
           console.error("No user data available.");
         }
@@ -211,9 +278,27 @@ export const ProfileProvider: React.FC<ProfileContextProps> = ({
         console.error("Error fetching addiction data:", error);
       }
     },
-    fetchUserAddictionData: async () => {
-      re
-    },
+    storeLocalAddictionData: (data: Partial<UserAddictionData>) => {
+      if (data.addiction) {
+        setUserAddictionData({
+          id: userAddictionData?.id,
+          addiction: data.addiction,
+          alternative: userAddictionData?.alternative,
+          createdAt: userAddictionData?.createdAt,
+          days: calculateDays
+        });
+      }
+      if (data.alternative) {
+        setUserAddictionData({
+          id: userAddictionData?.id,
+          addiction: userAddictionData?.addiction,
+          alternative: data.alternative,
+          createdAt: userAddictionData?.createdAt,
+          days: calculateDays
+        });
+      }
+      console.log("Storing local data:", data);
+    }
   };
 
   return (

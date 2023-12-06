@@ -10,10 +10,8 @@ import { InfoCircle, Refresh } from "iconoir-react-native";
 import { useProf } from "../../../lib/profile_ctx";
 
 export default function Home() {
-  const { storeLocal, updateUserProfile } = useProf();
-  const [custom, setCustom] = React.useState("");
+  const { storeLocalAddictionData } = useProf();
   const { interests } = useProf();
-  const [selected, setSelected] = React.useState<string[]>([]);
   let customInterest = "Painting";
   if (interests) {
     if (interests[0] != "") {
@@ -79,8 +77,8 @@ export default function Home() {
                 <Button
                   title="Running"
                   onPress={() => {
-                    storeLocal({ alternative: "Running" });
-                    router.push("/profile");
+                    storeLocalAddictionData({ alternative: "Running" });
+                    router.push("/profile?push=true");
                   }}
                   color="pink"
                   textColor="white"
@@ -147,8 +145,8 @@ export default function Home() {
                 <Button
                   title={customInterest}
                   onPress={() => {
-                    storeLocal({ alternative: customInterest });
-                    router.push("/profile");
+                    storeLocalAddictionData({ alternative: customInterest });
+                    router.push("/profile?push=true");
                   }}
                   color="purple"
                   textColor="white"

@@ -8,7 +8,7 @@ import textStyle from "../../../constants/textStyles";
 import Colors from "../../../constants/Colors";
 import { useProf } from "../../../lib/profile_ctx";
 export default function Home() {
-  const { storeLocal } = useProf();
+  const { storeLocalAddictionData } = useProf();
   const [custom, setCustom] = useState("");
   return (
     <ScrollView>
@@ -25,6 +25,9 @@ export default function Home() {
             placeholder="Enter your alternative habit"
             keyboardType="default"
             onChange={(text) => {
+              setCustom(text);
+            }}
+            onConfirm={(text) => {
               setCustom(text);
             }}
             disabled={true}
@@ -44,8 +47,8 @@ export default function Home() {
               color="orange"
               textColor="white"
               onPress={() => {
-                storeLocal({ alternative: custom });
-                router.push("/profile");
+                storeLocalAddictionData({ alternative: custom });
+                router.push("/profile?push=true");
               }}
             />
           </View>

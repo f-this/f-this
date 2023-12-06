@@ -10,7 +10,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Header from "../../../components/profile/header";
 import Button from "../../../components/button";
 import TextButton from "../../../components/textButton";
-import { router } from "expo-router";
+import { router, useGlobalSearchParams } from "expo-router";
 import { useAuth } from "../../../lib/auth_ctx";
 import Colors from "../../../constants/Colors";
 import textStyle from "../../../constants/textStyles";
@@ -20,12 +20,20 @@ import { useProf } from "../../../lib/profile_ctx";
 
 export default function Home() {
   const {
-    addiction,
-    alternative,
+    addictionData,
     locationEnabled,
     spotifyEnabled,
     updateUserProfile,
+    updateUserAddictionData,
   } = useProf();
+
+  // Get params
+  const params = useGlobalSearchParams();
+
+  if (params.push === "true") {
+    console.log("pushing");
+    updateUserAddictionData();
+  }
 
   return (
     <ScrollView>
@@ -45,20 +53,20 @@ export default function Home() {
             You are currently working on quitting
           </Text>
           <Text style={StyleSheet.compose(textStyle.body, styles.answer)}>
-            {addiction ? addiction : "Welcome back! Select a habit."}
+            {addictionData?.addiction ? addictionData?.addiction : "Welcome back! Select a habit."}
           </Text>
           <Text style={StyleSheet.compose(textStyle.body, styles.prompt)}>
             You last chose the alternative of
           </Text>
           <Text style={StyleSheet.compose(textStyle.body, styles.answer)}>
-            {alternative ? alternative : "Select an alternative"}
+            {addictionData?.alternative ? addictionData?.alternative : "Select an alternative"}
           </Text>
           <View style={styles.row}>
             <Text style={StyleSheet.compose(textStyle.body, styles.prompt)}>
               You have been working on this for
             </Text>
             <Text style={StyleSheet.compose(textStyle.body, styles.answer)}>
-              {addiction ? "14 days" : "0 days"}
+              {addictionData?.days ? "14 days" : "0 days"}
             </Text>
           </View>
           <View style={styles.row}>

@@ -6,7 +6,7 @@ import Button from "../button";
 import { useProf } from "../../lib/profile_ctx";
 
 export default function ButtonGroup() {
-  const { addiction, alternative } = useProf();
+  const { addictionData } = useProf();
   return (
     <View
       style={{
@@ -28,7 +28,7 @@ export default function ButtonGroup() {
           },
         ]}
       >
-        You are replacing {addiction ? addiction : "who knows what"} with
+        You are replacing {addictionData?.addiction ? addictionData?.addiction : "who knows what"} with
       </Text>
       <View
         style={{
@@ -51,7 +51,7 @@ export default function ButtonGroup() {
             },
           ]}
         >
-          {alternative ? alternative : "Who knows what..."}
+          {addictionData?.alternative ? addictionData?.alternative : "Who knows what..."}
         </Text>
       </View>
 
@@ -66,7 +66,7 @@ export default function ButtonGroup() {
       >
         <Button
           title="Get Supplies"
-          onPress={() => {}}
+          onPress={() => { }}
           style={{
             flex: 1,
             marginRight: 10,
@@ -75,7 +75,7 @@ export default function ButtonGroup() {
         />
         <Button
           title="Add Reminder"
-          onPress={() => {}}
+          onPress={() => { }}
           style={{
             flex: 1,
             marginVertical: 0,
@@ -84,7 +84,7 @@ export default function ButtonGroup() {
       </View>
       <Button
         title="Emergency Button"
-        onPress={() => {}}
+        onPress={() => { }}
         color="red"
         textColor="white"
       />

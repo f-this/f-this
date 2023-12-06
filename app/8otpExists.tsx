@@ -42,7 +42,7 @@ export default function Home() {
         } as Partial<UserContextData>;
         console.log("Updating user profile with data:", data);
 
-        updateUserProfile(data);
+        fetchUserProfile();
 
         router.push("/");
       }

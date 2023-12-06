@@ -27,7 +27,7 @@ export default function Home() {
               title="I Already Have An Account"
               onPress={() => {
                 //router.push("/add-addiction");
-                router.push("/7phone");
+                router.push("/7phoneExists");
               }}
             />
           </View>

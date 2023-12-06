@@ -5,6 +5,7 @@ import Colors from "../../constants/Colors";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useProf } from "../../lib/profile_ctx";
 import { useAuth } from "../../lib/auth_ctx";
+import { useEffect } from "react";
 
 export default function DashboardHeader() {
   const { signOut } = useAuth();

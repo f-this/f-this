@@ -1,4 +1,5 @@
 import { View, Text, Image, StyleSheet } from "react-native";
+import { useEffect } from "react";
 import textStyle from "../../constants/textStyles";
 import Colors from "../../constants/Colors";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -13,7 +14,6 @@ export default function profileHeader(props: profileHeaderProps) {
   const { signOut } = useAuth();
 
   const { id, name, fetchUserProfile } = useProf();
-  fetchUserProfile();
   let real = "John Doe";
   if (name != "" && name) {
     real = name;
@@ -29,6 +29,7 @@ export default function profileHeader(props: profileHeaderProps) {
         <TextButton
           style={{
             marginLeft: 320,
+            marginTop: 10,
           }}
           title="Sign Out"
           textColor="white"

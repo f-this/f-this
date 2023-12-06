@@ -84,6 +84,7 @@ export const ProfileProvider: React.FC<ProfileContextProps> = ({
         } = await supabase.auth.getUser();
 
         if (user) {
+          // Assuming that the 'id' field in the users table corresponds to the user ID
           const { data, error } = await supabase
             .from("users")
             .select("*")
@@ -92,7 +93,15 @@ export const ProfileProvider: React.FC<ProfileContextProps> = ({
 
           if (data) {
             setUserProfile(data);
-            console.log(data);
+            setName(data.name);
+            setPhone(data.phone);
+            setAddiction(data.addiction);
+            setAge(data.age);
+            setAlternative(data.alternative);
+            setSpotifyEnabled(data.spotifyEnabled);
+            setNotificationsEnabled(data.notificationsEnabled);
+            setLocationEnabled(data.locationEnabled);
+            console.log("fetching data: " + { data });
           } else {
             console.error("Error fetching user profile: No data found");
           }

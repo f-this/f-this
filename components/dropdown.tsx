@@ -16,6 +16,7 @@ interface dropdownProps {
   onMultiselect?: (values: string[]) => void;
   color?: keyof typeof Colors;
   textColor?: keyof typeof Colors;
+  maxCount?: number;
 }
 
 export default function Dropdown(props: dropdownProps) {
@@ -43,11 +44,14 @@ export default function Dropdown(props: dropdownProps) {
                 let selectedNew = [...selected];
                 if (selected.length != 0 && selected.includes(item)) {
                   selectedNew.splice(selectedNew.indexOf(item), 1);
-                  setSelected(selectedNew);
-                } else {
-                  selectedNew.push(item);
-                  setSelected(selectedNew);
+                } else if (props.maxCount && selected.length >= props.maxCount) {
+                  // Replace the last item with the new one
+                  selectedNew.splice(0, 1, item);
                 }
+                else {
+                  selectedNew.push(item);
+                }
+                setSelected(selectedNew);
                 props.onMultiselect(selectedNew);
               } else {
                 setSelected([item]);
@@ -59,7 +63,7 @@ export default function Dropdown(props: dropdownProps) {
             {props.onMultiselect && (
               <CheckboxNoState
                 initialState={selected.includes(item)}
-                onPress={() => {}}
+                onPress={() => { }}
               />
             )}
           </TouchableOpacity>

@@ -52,6 +52,7 @@ export default function Home() {
               options={["Smoking", "Gambling", "Illicit Substances", "Sugar"]}
               onMultiselect={handleMultiselect}
               onPress={handlePress}
+              maxCount={1}
             />
             <View style={{ height: 10 }} />
             <TextButton

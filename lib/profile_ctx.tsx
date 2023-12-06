@@ -2,6 +2,15 @@ import { createContext, useContext, useState, useEffect } from "react";
 import { supabase } from "./supabase";
 import { User } from "@supabase/supabase-js";
 
+
+export interface UserAddictionData {
+  id: string;
+  addiction: string;
+  alternative: string;
+  createdAt: string;
+  days: () => number;
+}
+
 export interface UserContextData {
   id: string | null;
   phone: string | null;
@@ -12,12 +21,16 @@ export interface UserContextData {
   notificationsEnabled: boolean;
   age: string | null;
   userProfile: User | null;
-  addiction: string | null;
-  alternative: string | null;
   storeLocal: (data: Partial<UserContextData>) => void;
   updateUserProfile: (data: Partial<UserContextData>) => Promise<any>;
   fetchUserProfile: () => Promise<any>;
+  hasProfile: () => boolean;
+  ////////////////////////////////////////////////////////////////////////////////////
+  addictionData: UserAddictionData | null;
+  updateUserAddictionData: () => Promise<any>;
+  fetchUserAddictionData: () => Promise<any>;
 }
+
 
 interface ProfileContextProps {
   children: React.ReactNode;
@@ -35,12 +48,13 @@ export const ProfileProvider: React.FC<ProfileContextProps> = ({
   const [phone, setPhone] = useState("");
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
-  const [alternative, setAlternative] = useState("");
-  const [addiction, setAddiction] = useState("");
   const [interests, setInterests] = useState([""]);
   const [locationEnabled, setLocationEnabled] = useState(false);
   const [spotifyEnabled, setSpotifyEnabled] = useState(false);
   const [notificationsEnabled, setNotificationsEnabled] = useState(false);
+  let [createdAt, setCreatedAt] = useState<string | null>(null);
+
+  const [userAddictionData, setUserAddictionData] = useState<UserAddictionData | null>(null);
 
   useEffect(() => {
     // get session data if there is an active session
@@ -64,18 +78,17 @@ export const ProfileProvider: React.FC<ProfileContextProps> = ({
     };
   }, []);
 
-  const value = {
+  const value: UserContextData = {
     id: userProfile?.id || null,
     phone,
     name,
-    interests,
     locationEnabled,
     spotifyEnabled,
     notificationsEnabled,
     age,
     userProfile,
-    addiction,
-    alternative,
+    addictionData: userAddictionData,
+    interests,
     fetchUserProfile: async () => {
       try {
         const {
@@ -95,13 +108,13 @@ export const ProfileProvider: React.FC<ProfileContextProps> = ({
             setUserProfile(data);
             setName(data.name);
             setPhone(data.phone);
-            setAddiction(data.addiction);
+            setUserAddictionData(data.addiction);
             setAge(data.age);
-            setAlternative(data.alternative);
             setSpotifyEnabled(data.spotifyEnabled);
             setNotificationsEnabled(data.notificationsEnabled);
             setLocationEnabled(data.locationEnabled);
-            console.log("fetching data: " + { data });
+            setCreatedAt(data.created_at);
+            console.log("Fetched data: " + JSON.stringify(data));
           } else {
             console.error("Error fetching user profile: No data found");
           }
@@ -124,9 +137,6 @@ export const ProfileProvider: React.FC<ProfileContextProps> = ({
       if (data.name) {
         setName(data.name);
       }
-      if (data.interests) {
-        setInterests(data.interests);
-      }
       if (data.locationEnabled !== undefined) {
         setLocationEnabled(data.locationEnabled);
       }
@@ -136,15 +146,15 @@ export const ProfileProvider: React.FC<ProfileContextProps> = ({
       if (data.notificationsEnabled !== undefined) {
         setNotificationsEnabled(data.notificationsEnabled);
       }
-      if (data.addiction) {
-        setAddiction(data.addiction);
+      if (data.interests) {
+        setInterests(data.interests);
       }
-      if (data.alternative) {
-        setAlternative(data.alternative);
+      if (data.addictionData) {
+        setUserAddictionData(data.addictionData);
       }
       console.log("Storing local data:", data);
     },
-    updateUserProfile: async (data: Partial<UserContextData>) => {
+    updateUserProfile: async () => {
       let fallbackUser = (await supabase.auth.getUser()).data.user;
       if (userProfile || fallbackUser) {
         try {
@@ -158,9 +168,13 @@ export const ProfileProvider: React.FC<ProfileContextProps> = ({
             spotify: spotifyEnabled,
             notifications: notificationsEnabled,
           };
+          // Delete any null or undefined values
+          let cleanData = Object.fromEntries(
+            Object.entries(updateData).filter(([_, v]) => v != null)
+          );
           const { error } = await supabase
             .from("users")
-            .upsert(updateData)
+            .upsert(cleanData)
             .eq("id", userProfile ? userProfile.id : fallbackUser?.id);
           if (error) {
             console.error("Error updating user profile:", error);
@@ -169,6 +183,36 @@ export const ProfileProvider: React.FC<ProfileContextProps> = ({
           console.error("Error updating user profile:", error);
         }
       }
+    },
+    hasProfile: () => {
+      return createdAt !== null;
+    },
+    updateUserAddictionData: async () => {
+      try {
+        const {
+          data: { user },
+          error,
+        } = await supabase.auth.getUser();
+
+        if (user) {
+          // Assuming that the 'id' field in the users table corresponds to the user ID
+          const { data, error } = await supabase
+            .from("user_addictions")
+            .upsert({
+              addiction: userAddictionData?.addiction,
+              alternative: userAddictionData?.alternative,
+              user_id: user.id,
+              id: userAddictionData?.id,
+            });
+        } else {
+          console.error("No user data available.");
+        }
+      } catch (error) {
+        console.error("Error fetching addiction data:", error);
+      }
+    },
+    fetchUserAddictionData: async () => {
+      re
     },
   };
 

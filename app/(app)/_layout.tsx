@@ -2,16 +2,18 @@ import { Redirect, Stack } from 'expo-router';
 import { useAuth } from '../../lib/auth_ctx';
 import { Text, View } from 'react-native';
 import React from 'react';
-import AppBar from '../../components/appBar';
-import { BlurView } from 'expo-blur';
+import { useProf } from '../../lib/profile_ctx';
+import LoadingPage from '../../components/loading';
 
 export default function AppLayout() {
     const auth = useAuth();
+    const profile = useProf();
+    const [isLoading, setIsLoading] = React.useState(false);
 
 
     // You can keep the splash screen open, or render a loading screen like we do here.
-    if (auth.loading) {
-        return <Text>Loading...</Text>;
+    if (auth.loading || isLoading) {
+        return <LoadingPage />;
     }
 
     // Only require authentication within the (app) group's layout as users
@@ -21,6 +23,22 @@ export default function AppLayout() {
         // in the headless Node process that the pages are rendered in.
         return <Redirect href="/0start" />;
     }
+
+    if (!profile.hasProfile() && !isLoading) {
+        console.log("Fetching user profile");
+        profile.fetchUserProfile().then(() => {
+            setIsLoading(false);
+        }).catch((err) => {
+            console.error("Error fetching user profile", err);
+            setIsLoading(false);
+        });
+        setIsLoading(true);
+    }
+    else if (profile.hasProfile() && !isLoading && !profile.name) {
+        console.log("User has profile but no name");
+        return <Redirect href="/1age" />;
+    }
+
 
     // This layout can be deferred because it's not the root layout.
     return <Stack screenOptions={{ header: () => null }} />

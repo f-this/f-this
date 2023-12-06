@@ -10,7 +10,7 @@ import { InfoCircle, Refresh } from "iconoir-react-native";
 import { useProf } from "../../../lib/profile_ctx";
 
 export default function Home() {
-  const { storeLocal } = useProf();
+  const { storeLocal, updateUserProfile } = useProf();
   const [custom, setCustom] = React.useState("");
   const { interests } = useProf();
   const [selected, setSelected] = React.useState<string[]>([]);

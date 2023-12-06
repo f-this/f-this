@@ -22,6 +22,7 @@ import {
   Inter_800ExtraBold,
   Inter_900Black,
 } from "@expo-google-fonts/inter";
+import { ReporterProvider } from "../lib/reporting_ctx";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -72,9 +73,11 @@ function RootLayoutNav() {
   return (
     <AuthProvider>
       <ProfileProvider>
-        <ThemeProvider value={DefaultTheme}>
-          <Slot />
-        </ThemeProvider>
+        <ReporterProvider>
+          <ThemeProvider value={DefaultTheme}>
+            <Slot />
+          </ThemeProvider>
+        </ReporterProvider>
       </ProfileProvider>
     </AuthProvider>
   );

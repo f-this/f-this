@@ -13,6 +13,7 @@ export default function profileHeader(props: profileHeaderProps) {
   const { signOut } = useAuth();
 
   const { id, name, fetchUserProfile } = useProf();
+  fetchUserProfile();
   let real = "John Doe";
   if (name != "" && name) {
     real = name;

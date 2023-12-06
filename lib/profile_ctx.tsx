@@ -151,7 +151,7 @@ export const ProfileProvider: React.FC<ProfileContextProps> = ({
           };
           const { error } = await supabase
             .from("users")
-            .update(updateData)
+            .upsert(updateData)
             .eq("id", userProfile ? userProfile.id : fallbackUser?.id);
           if (error) {
             console.error("Error updating user profile:", error);

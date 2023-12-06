@@ -1,4 +1,4 @@
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, KeyboardAvoidingView, ScrollView } from "react-native";
 import { StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Header from "../../../components/profile/header";
@@ -16,63 +16,66 @@ export default function Home() {
   const { addiction, locationEnabled, spotifyEnabled } = useProf();
 
   return (
-    <View>
-      <Header />
-      <View style={{ marginLeft: 40, marginRight: 40 }}>
-        <Text
-          style={StyleSheet.compose(textStyle.body, {
-            fontSize: 18,
-            color: Colors.black,
-            fontWeight: "bold",
-          })}
-        >
-          Your Preferences
-        </Text>
-        <Text style={StyleSheet.compose(textStyle.body, styles.prompt)}>
-          You are currently working on quitting
-        </Text>
-        <Text style={StyleSheet.compose(textStyle.body, styles.answer)}>
-          {addiction ? addiction : "Unknown"}
-        </Text>
-        <Text style={StyleSheet.compose(textStyle.body, styles.prompt)}>
-          You have been working on this for
-        </Text>
-        <Text style={StyleSheet.compose(textStyle.body, styles.answer)}>
-          14 days
-        </Text>
-        <View style={styles.row}>
+    <ScrollView >
+      <KeyboardAvoidingView behavior={"padding"}>
+        <Header />
+        <View style={{ marginLeft: 40, marginRight: 40, marginBottom: 100 }}>
+          <Text
+            style={StyleSheet.compose(textStyle.body, {
+              fontSize: 18,
+              color: Colors.black,
+              fontWeight: "bold",
+            })}
+          >
+            Your Preferences
+          </Text>
           <Text style={StyleSheet.compose(textStyle.body, styles.prompt)}>
-            Location Access:
+            You are currently working on quitting
           </Text>
           <Text style={StyleSheet.compose(textStyle.body, styles.answer)}>
-            {locationEnabled ? "Enabled" : "Disabled"}
+            {addiction ? addiction : "Unknown"}
           </Text>
-        </View>
-        <View style={styles.row}>
           <Text style={StyleSheet.compose(textStyle.body, styles.prompt)}>
-            Spotify Integration:
+            You have been working on this for
           </Text>
           <Text style={StyleSheet.compose(textStyle.body, styles.answer)}>
-            {spotifyEnabled ? "Enabled" : "Disabled"}
+            14 days
           </Text>
+          <View style={styles.row}>
+            <Text style={StyleSheet.compose(textStyle.body, styles.prompt)}>
+              Location Access:
+            </Text>
+            <Text style={StyleSheet.compose(textStyle.body, styles.answer)}>
+              {locationEnabled ? "Enabled" : "Disabled"}
+            </Text>
+          </View>
+          <View style={styles.row}>
+            <Text style={StyleSheet.compose(textStyle.body, styles.prompt)}>
+              Spotify Integration:
+            </Text>
+            <Text style={StyleSheet.compose(textStyle.body, styles.answer)}>
+              {spotifyEnabled ? "Enabled" : "Disabled"}
+            </Text>
+          </View>
+          <View style={styles.row}>
+            <Text style={StyleSheet.compose(textStyle.body, styles.prompt)}>
+              Last Report Sent Out:
+            </Text>
+            <Text style={StyleSheet.compose(textStyle.body, styles.answer)}>
+              a week ago
+            </Text>
+          </View>
+          <Button
+            title="Edit My Preferences"
+            color="blue"
+            onPress={() => console.log("hello")}
+            textColor="white"
+            marginTop={30}
+          />
         </View>
-        <View style={styles.row}>
-          <Text style={StyleSheet.compose(textStyle.body, styles.prompt)}>
-            Last Report Sent Out:
-          </Text>
-          <Text style={StyleSheet.compose(textStyle.body, styles.answer)}>
-            a week ago
-          </Text>
-        </View>
-        <Button
-          title="Edit My Preferences"
-          color="blue"
-          onPress={() => console.log("hello")}
-          textColor="white"
-          marginTop={30}
-        />
-      </View>
-    </View>
+
+      </KeyboardAvoidingView>
+    </ScrollView>
   );
 }
 

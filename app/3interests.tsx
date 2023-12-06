@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { View, Text, KeyboardAvoidingView, ScrollView } from "react-native";
 import Header from "../components/header";
 import { router } from "expo-router";
 import React from "react";
@@ -23,58 +23,60 @@ export default function Home() {
   };
 
   return (
-    <View>
-      <Header
-        showLogo
-        title="Step 3"
-        subtitle={"What are you interested in?"}
-        body="Small talk, I know... I hate it too"
-        color="pink"
-        onBack={() => router.back()}
-        action={
-          // Buttons go here
-          <View style={{ width: "100%" }}>
-            <TextBoxInput placeholder="Type to Search" keyboardType="default" />
-            <Dropdown
-              options={[
-                "Soccer",
-                "Listening to Music",
-                "Animals",
-                "Running",
-                "Football",
-                "Tennis",
-                "Biking",
-              ]}
-              onMultiselect={(_) => {
-                console.log(_);
-                handleInterestChange(_);
-              }}
-              onPress={() => { }}
-            />
-            <View
-              style={{ flexDirection: "row", justifyContent: "space-between" }}
-            >
-              <Text style={textStyle.caption}>Select at least 2 interests</Text>
-              {interests.length >= 2 && <FabButton
-                marginTop={10}
-                onPress={() => {
-                  handleConfirm();
+    <ScrollView>
+      <KeyboardAvoidingView behavior={"padding"}>
+        <Header
+          showLogo
+          title="Step 3"
+          subtitle={"What are you interested in?"}
+          body="Small talk, I know... I hate it too"
+          color="pink"
+          onBack={() => router.back()}
+          action={
+            // Buttons go here
+            <View style={{ width: "100%" }}>
+              <TextBoxInput placeholder="Type to Search" keyboardType="default" />
+              <Dropdown
+                options={[
+                  "Soccer",
+                  "Listening to Music",
+                  "Animals",
+                  "Running",
+                  "Football",
+                  "Tennis",
+                  "Biking",
+                ]}
+                onMultiselect={(_) => {
+                  console.log(_);
+                  handleInterestChange(_);
                 }}
+                onPress={() => { }}
+              />
+              <View
+                style={{ flexDirection: "row", justifyContent: "space-between" }}
               >
-                <ArrowRight
-                  color="black"
-                  width={30}
-                  height={30}
-                  strokeWidth={2}
-                />
-              </FabButton>}
+                <Text style={textStyle.caption}>Select at least 2 interests</Text>
+                {interests.length >= 2 && <FabButton
+                  marginTop={10}
+                  onPress={() => {
+                    handleConfirm();
+                  }}
+                >
+                  <ArrowRight
+                    color="black"
+                    width={30}
+                    height={30}
+                    strokeWidth={2}
+                  />
+                </FabButton>}
+              </View>
             </View>
-          </View>
-        }
-        showProgress
-        totalSteps={8}
-        currentStep={3}
-      />
-    </View>
+          }
+          showProgress
+          totalSteps={8}
+          currentStep={3}
+        />
+      </KeyboardAvoidingView>
+    </ScrollView >
   );
 }

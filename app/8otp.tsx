@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { View, Text, KeyboardAvoidingView, ScrollView } from "react-native";
 import Header from "../components/header";
 import { router } from "expo-router";
 import React from "react";
@@ -47,7 +47,8 @@ export default function Home() {
   };
 
   return (
-    <View>
+    <ScrollView >
+      <KeyboardAvoidingView behavior={"padding"}>
       <Header
         showLogo
         title="Okay, that was a small lie"
@@ -79,6 +80,7 @@ export default function Home() {
         totalSteps={8}
         currentStep={8}
       />
-    </View>
+      </KeyboardAvoidingView>
+    </ScrollView >
   );
 }

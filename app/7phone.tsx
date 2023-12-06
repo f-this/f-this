@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, KeyboardAvoidingView, ScrollView } from "react-native";
 import { useState } from "react";
 import Header from "../components/header";
 import { router } from "expo-router";
@@ -15,7 +15,8 @@ export default function Home() {
   const { storeLocal } = useProf();
 
   return (
-    <View>
+    <ScrollView >
+      <KeyboardAvoidingView behavior={"padding"}>
       <Header
         showLogo
         title="Can I have your number?"
@@ -54,6 +55,7 @@ export default function Home() {
         totalSteps={8}
         currentStep={7}
       />
-    </View>
+      </KeyboardAvoidingView>
+    </ScrollView >
   );
 }

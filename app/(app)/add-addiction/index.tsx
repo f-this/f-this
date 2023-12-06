@@ -1,4 +1,4 @@
-import { View } from "react-native";
+import { KeyboardAvoidingView, ScrollView, View } from "react-native";
 import Header from "../../../components/header";
 import Button from "../../../components/button";
 import TextButton from "../../../components/textButton";
@@ -30,46 +30,50 @@ export default function Home() {
     console.log(selected);
   }, [selected]);
   return (
-    <View
-      style={{
-        flex: 1,
-        flexDirection: "column",
-      }}
-    >
-      <Header
-        showLogo
-        title="Let’s get to the point"
-        body={
-          "We both have places to be and things to do, so let’s get started. Time to say “F*** it” to your addictions for good."
-        }
-        color="black"
-        onBack={() => router.back()}
-      />
-      <View style={{ marginHorizontal: 34, position: "absolute", bottom: 40 }}>
-        <Dropdown
-          options={["Smoking", "Gambling", "Illicit Substances", "Sugar"]}
-          onMultiselect={handleMultiselect}
-          onPress={handlePress}
-        />
-        <View style={{ height: 10 }} />
-        <TextButton
-          title="I don’t see my addiction"
-          onPress={() => {
-            router.push("/add-addiction/replacement");
+    <ScrollView >
+      <KeyboardAvoidingView behavior={"padding"}>
+        <View
+          style={{
+            flex: 1,
+            flexDirection: "column",
           }}
-          textColor="black"
-        />
-        <View style={{ height: 20 }} />
-        <Button
-          title="Let’s go!"
-          onPress={() => {
-            router.push(`/add-addiction/${route}`);
-          }}
-          disabled={!(selected.length > 0) || selected.length > 1}
-          color="blue"
-          textColor="white"
-        />
-      </View>
-    </View>
+        >
+          <Header
+            showLogo
+            title="Let’s get to the point"
+            body={
+              "We both have places to be and things to do, so let’s get started. Time to say “F*** it” to your addictions for good."
+            }
+            color="black"
+            onBack={() => router.back()}
+          />
+          <View style={{ marginHorizontal: 34, position: "relative", top: -100 }}>
+            <Dropdown
+              options={["Smoking", "Gambling", "Illicit Substances", "Sugar"]}
+              onMultiselect={handleMultiselect}
+              onPress={handlePress}
+            />
+            <View style={{ height: 10 }} />
+            <TextButton
+              title="I don’t see my addiction"
+              onPress={() => {
+                router.push("/add-addiction/replacement");
+              }}
+              textColor="black"
+            />
+            <View style={{ height: 20 }} />
+            <Button
+              title="Let’s go!"
+              onPress={() => {
+                router.push(`/add-addiction/${route}`);
+              }}
+              disabled={!(selected.length > 0) || selected.length > 1}
+              color="blue"
+              textColor="white"
+            />
+          </View>
+        </View>
+      </KeyboardAvoidingView>
+    </ScrollView >
   );
 }

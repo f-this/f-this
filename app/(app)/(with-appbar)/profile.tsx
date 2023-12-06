@@ -26,7 +26,6 @@ export default function Home() {
     spotifyEnabled,
     updateUserProfile,
   } = useProf();
-  updateUserProfile({ addiction: addiction, alternative: alternative });
 
   return (
     <ScrollView>
@@ -46,20 +45,20 @@ export default function Home() {
             You are currently working on quitting
           </Text>
           <Text style={StyleSheet.compose(textStyle.body, styles.answer)}>
-            {addiction ? addiction : "Select an addiction"}
+            {addiction ? addiction : "Welcome back! Select a habit."}
           </Text>
           <Text style={StyleSheet.compose(textStyle.body, styles.prompt)}>
             You last chose the alternative of
           </Text>
           <Text style={StyleSheet.compose(textStyle.body, styles.answer)}>
-            {alternative ? alternative : "Choose your first alternative"}{" "}
+            {alternative ? alternative : "Select an alternative"}
           </Text>
           <View style={styles.row}>
             <Text style={StyleSheet.compose(textStyle.body, styles.prompt)}>
               You have been working on this for
             </Text>
             <Text style={StyleSheet.compose(textStyle.body, styles.answer)}>
-              14 days
+              {addiction ? "14 days" : "0 days"}
             </Text>
           </View>
           <View style={styles.row}>

@@ -3,29 +3,53 @@ import shadow from "../../constants/shadows";
 import textStyle from "../../constants/textStyles";
 import Colors from "../../constants/Colors";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
-import Animated, { useSharedValue, useAnimatedStyle, withTiming } from "react-native-reanimated";
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withTiming,
+} from "react-native-reanimated";
+import { useProf } from "../../lib/profile_ctx";
 
 export default function Checkup() {
+  const { addiction } = useProf();
+  let choice = "No habit yet to check up on! Select a habit to quit!";
+
+  let smokingText =
+    "Research shows that after 14 days without nicotine you will start feeling less urges to smoke";
+  let gamblingText =
+    "Research shows that after 14 days without high risk behavior you will start feeling less urges to gamble";
+  let illicitText =
+    "Research shows that after 14 days without drugs you will start feeling less urges to do illicit subtances";
+  let sugarText =
+    "Research shows that after 14 days without sugar you will start feeling less sweet cravings";
+  if (addiction == "Smoking") {
+    choice = smokingText;
+  } else if (addiction == "Gambling") {
+    choice = gamblingText;
+  } else if (addiction == "Illicit") {
+    choice = illicitText;
+  } else if (addiction == "Sugar") {
+    choice = sugarText;
+  }
   return (
     <View style={styles.container}>
       <View style={styles.innerContainer as any}>
         <Text style={styles.title}>Daily Check-Up</Text>
-        <Text style={styles.body}>
-          Research shows that after 14 days without nicotine you will start
-          feeling less urges to smoke
-        </Text>
-
+        <Text style={styles.body}>{choice}</Text>
         <View style={styles.buttonContainer}>
-          <SlimButton title="Fake News" onPress={() => { }} white />
-          <SlimButton title="OMG so real" onPress={() => { }} white={false} />
+          <SlimButton title="Fake News" onPress={() => {}} white />
+          <SlimButton title="OMG so real" onPress={() => {}} white={false} />
         </View>
       </View>
     </View>
   );
 }
 
-
-function SlimButton(props: { title: string, onPress: () => void, white: boolean }) {
+function SlimButton(props: {
+  title: string;
+  onPress: () => void;
+  white: boolean;
+}) {
   const shadowOffsetWidth = useSharedValue(3);
   const shadowOffsetHeight = useSharedValue(4);
 
@@ -54,8 +78,15 @@ function SlimButton(props: { title: string, onPress: () => void, white: boolean 
 
   return (
     <GestureDetector gesture={tap}>
-      <Animated.View style={[props.white ? styles.button : styles.blueButton as any, animatedStyle]}>
-        <Text style={props.white ? styles.buttonText : styles.blueButtonText}>{props.title}</Text>
+      <Animated.View
+        style={[
+          props.white ? styles.button : (styles.blueButton as any),
+          animatedStyle,
+        ]}
+      >
+        <Text style={props.white ? styles.buttonText : styles.blueButtonText}>
+          {props.title}
+        </Text>
       </Animated.View>
     </GestureDetector>
   );

@@ -3,8 +3,10 @@ import shadow from "../../constants/shadows";
 import textStyle from "../../constants/textStyles";
 import Colors from "../../constants/Colors";
 import Button from "../button";
+import { useProf } from "../../lib/profile_ctx";
 
 export default function ButtonGroup() {
+  const { addiction, alternative } = useProf();
   return (
     <View
       style={{
@@ -18,10 +20,15 @@ export default function ButtonGroup() {
       <Text
         style={[
           textStyle.body,
-          { color: Colors.black, marginTop: 5, textAlign: "left", width: "100%" },
+          {
+            color: Colors.black,
+            marginTop: 5,
+            textAlign: "left",
+            width: "100%",
+          },
         ]}
       >
-        You are replacing Smoking with
+        You are replacing {addiction ? addiction : "who knows what"} with
       </Text>
       <View
         style={{
@@ -44,7 +51,7 @@ export default function ButtonGroup() {
             },
           ]}
         >
-          Dark Chocolate
+          {alternative ? alternative : "Who knows what..."}
         </Text>
       </View>
 
@@ -57,20 +64,30 @@ export default function ButtonGroup() {
           paddingVertical: 5,
         }}
       >
-
-        <Button title="Get Supplies" onPress={() => { }}
+        <Button
+          title="Get Supplies"
+          onPress={() => {}}
           style={{
             flex: 1,
             marginRight: 10,
             marginVertical: 0,
-          }} />
-        <Button title="Add Reminder" onPress={() => { }}
+          }}
+        />
+        <Button
+          title="Add Reminder"
+          onPress={() => {}}
           style={{
             flex: 1,
             marginVertical: 0,
-          }} />
+          }}
+        />
       </View>
-      <Button title="Emergency Button" onPress={() => { }} color="red" textColor="white" />
+      <Button
+        title="Emergency Button"
+        onPress={() => {}}
+        color="red"
+        textColor="white"
+      />
     </View>
   );
 }

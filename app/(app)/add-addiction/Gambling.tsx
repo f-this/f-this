@@ -14,10 +14,10 @@ export default function Home() {
   const [custom, setCustom] = React.useState("");
   const { interests } = useProf();
   const [selected, setSelected] = React.useState<string[]>([]);
-  let customInterest = "Skydiving";
+  let customInterest = "Sky diving";
   if (interests) {
-    if (interests[1] != "") {
-      customInterest = interests[1];
+    if (interests[0] != "") {
+      customInterest = interests[0];
     }
   }
 

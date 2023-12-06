@@ -5,10 +5,10 @@ import TextButton from "../../../components/textButton";
 import { router } from "expo-router";
 import React, { useCallback, useEffect } from "react";
 import Dropdown from "../../../components/dropdown";
-import { useProf } from "../../../lib/profile_ctx";
+import { useProf, UserContextData } from "../../../lib/profile_ctx";
 
 export default function Home() {
-  const { storeLocal } = useProf();
+  const { storeLocal, updateUserProfile } = useProf();
   const [selected, setSelected] = React.useState<string[]>([]);
   const [route, setRoute] = React.useState("");
   const handleMultiselect = useCallback((items: string[]) => {
@@ -30,7 +30,7 @@ export default function Home() {
     console.log(selected);
   }, [selected]);
   return (
-    <ScrollView >
+    <ScrollView>
       <KeyboardAvoidingView behavior={"padding"}>
         <View
           style={{
@@ -47,7 +47,9 @@ export default function Home() {
             color="black"
             onBack={() => router.back()}
           />
-          <View style={{ marginHorizontal: 34, position: "relative", top: -100 }}>
+          <View
+            style={{ marginHorizontal: 34, position: "relative", top: -100 }}
+          >
             <Dropdown
               options={["Smoking", "Gambling", "Illicit Substances", "Sugar"]}
               onMultiselect={handleMultiselect}
@@ -75,6 +77,6 @@ export default function Home() {
           </View>
         </View>
       </KeyboardAvoidingView>
-    </ScrollView >
+    </ScrollView>
   );
 }

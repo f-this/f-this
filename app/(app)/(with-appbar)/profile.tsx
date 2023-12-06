@@ -94,11 +94,24 @@ export default function Home() {
             </Text>
           </View>
           <Button
+            title="Edit My Report Settings"
+            color="green"
+            onPress={() => {
+              router.push("/reporting");
+            }}
+            textColor="white"
+            marginTop={10}
+            height={20}
+            style={{
+              paddingVertical: 10,
+            }}
+          />
+          <Button
             title="Edit My Preferences"
             color="blue"
             onPress={() => console.log("hello")}
             textColor="white"
-            marginTop={30}
+            marginTop={10}
           />
         </View>
       </KeyboardAvoidingView>

@@ -1,6 +1,7 @@
 import { createContext, useContext, useState } from "react";
 import { supabase } from "./supabase";
 import { useAuth } from "./auth_ctx";
+import uuid from 'react-native-uuid';
 
 
 enum ReportType {
@@ -28,6 +29,8 @@ interface Reporter {
 
 interface ReporterContextData {
     reporters: Reporter[];
+    partialReporter?: Partial<Reporter>;
+    buildReporter: (partialReporter: Partial<Reporter>) => void;
     addReporter: (reporter: Reporter) => void;
     removeReporter: (reporter: Reporter) => void;
     updateReporter: (reporter: Reporter) => void;
@@ -45,7 +48,28 @@ export const ReporterProvider: React.FC<ReporterContextProps> = ({
     children,
 }) => {
     const [reporters, setReporters] = useState<Reporter[]>([]);
+    const [partialReporter, setPartialReporter] = useState<Partial<Reporter> | null>(null);
     const auth = useAuth();
+
+    const buildReporter = (partialReporterUpdate: Partial<Reporter>) => {
+        if (partialReporter == null || partialReporter.id == null) {
+            setPartialReporter({ id: uuid.v4().toString(), ...partialReporter, ...partialReporterUpdate });
+            return;
+        }
+        setPartialReporter({
+            ...partialReporter,
+            ...partialReporterUpdate,
+        });
+
+        // Check if reporter is complete
+        if (partialReporter.name == null || partialReporter.method == null || partialReporter.handle == null || partialReporter.frequencyDays == null || partialReporter.reportType == null) {
+            return;
+        }
+
+        // Add reporter to state
+        console.log("Adding reporter", partialReporter);
+        addReporter(partialReporter as Reporter);
+    }
 
     const addReporter = async (reporter: Reporter) => {
         setReporters([...reporters, reporter]);
@@ -120,6 +144,7 @@ export const ReporterProvider: React.FC<ReporterContextProps> = ({
                 addReporter,
                 removeReporter,
                 updateReporter,
+                buildReporter,
             }}
         >
             {children}

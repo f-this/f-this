@@ -19,7 +19,7 @@ export default function appBar() {
 
   let home = pathname === "/";
   let addiction = pathname === "/addiction";
-  let profile = pathname === "/profile";
+  let profile = pathname === "/profile" || pathname === "/reporting";
 
 
   return (

@@ -19,6 +19,7 @@ interface ButtonProps {
   height?: number;
   marginTop?: number;
   style?: any;
+  textStyle?: any;
 }
 
 export default function Button(props: ButtonProps) {
@@ -71,7 +72,7 @@ export default function Button(props: ButtonProps) {
     <GestureDetector gesture={tap}>
       <Animated.View style={[buttonStyle, animatedStyle]}>
         {props.leadingIcon}
-        <Text style={textStyle}>{props.title}</Text>
+        <Text style={[textStyle, props.textStyle]}>{props.title}</Text>
       </Animated.View>
     </GestureDetector>
   );

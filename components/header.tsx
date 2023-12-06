@@ -19,6 +19,7 @@ interface HeaderProps {
   action?: JSX.Element;
   onBack?: () => void;
   onCancel?: () => void;
+  triangleHeight?: number;
 }
 
 const Header = (props: HeaderProps = {}) => {
@@ -90,7 +91,7 @@ const Header = (props: HeaderProps = {}) => {
           {props.action && props.action}
         </View>
       </SafeAreaView>
-      <EndTriangle color={Colors[props.color ?? "blue"]} />
+      <EndTriangle color={Colors[props.color ?? "blue"]} height={props.triangleHeight ?? 150} />
     </View>
   );
 };
@@ -102,7 +103,7 @@ function EndTriangle(props: any) {
       style={{
         // Should fill the width of the screen
         width: "100%",
-        height: "150px",
+        height: `${props.triangleHeight ?? 150}px`,
       }}
       viewBox="0 0 389 155"
       fill="none"

@@ -7,9 +7,11 @@ import textStyle from "../../../constants/textStyles";
 import Colors from "../../../constants/Colors";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { InfoCircle, Refresh } from "iconoir-react-native";
+import { ReportMethod, useReporter } from "../../../lib/reporting_ctx";
 
 export default function Home() {
   const [selected, setSelected] = React.useState<string[]>([]);
+  const { buildReporter } = useReporter();
 
   return (
     <View
@@ -49,7 +51,9 @@ export default function Home() {
             <View style={{ height: 10 }} />
             <Button
               title="Slide into their DMs (Instagram)"
-              onPress={() => { }}
+              onPress={() => {
+                router.push("/reporting");
+              }}
               color="pink"
               textColor="white"
             />
@@ -58,7 +62,9 @@ export default function Home() {
 
             <Button
               title="Slide into their inbox (email)"
-              onPress={() => { }}
+              onPress={() => {
+                router.push("/reporting");
+              }}
               color="purple"
               textColor="white"
             />
@@ -67,7 +73,9 @@ export default function Home() {
 
             <Button
               title="I will share it myself"
-              onPress={() => { }}
+              onPress={() => {
+                router.push("/reporting");
+              }}
               color="blue"
               textColor="white"
             />

@@ -43,6 +43,7 @@ export default function Home() {
                 reporter.buildReporter({
                   frequencyDays: fequencyMap[selected[0] as keyof typeof fequencyMap],
                 })
+                router.push("/generate-report/type");
               }}
             />
           </View>

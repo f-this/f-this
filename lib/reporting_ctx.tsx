@@ -4,14 +4,14 @@ import { useAuth } from "./auth_ctx";
 import uuid from 'react-native-uuid';
 
 
-enum ReportType {
+export enum ReportType {
     TimePerHabit = "TimePerHabit",
     Breakthroughs = "Breakthroughs",
     Reflections = "Reflections",
     Streak = "Streak",
 }
 
-enum ReportMethod {
+export enum ReportMethod {
     Text = "Text",
     Email = "Email",
     Insta = "Insta",

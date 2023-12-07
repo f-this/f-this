@@ -4,10 +4,12 @@ import { Text, View } from 'react-native';
 import React from 'react';
 import { useProf } from '../../lib/profile_ctx';
 import LoadingPage from '../../components/loading';
+import { useReporter } from '../../lib/reporting_ctx';
 
 export default function AppLayout() {
     const auth = useAuth();
     const profile = useProf();
+    const reporting = useReporter();
     const [isLoading, setIsLoading] = React.useState(false);
 
 
@@ -27,7 +29,12 @@ export default function AppLayout() {
     if (!profile.hasProfile() && !isLoading) {
         console.log("Fetching user profile");
         profile.fetchUserProfile().then(() => {
-            setIsLoading(false);
+            reporting.fetchReporters().then(() => {
+                setIsLoading(false);
+            }).catch((err1) => {
+                console.error("Error fetching reporters", err1);
+                setIsLoading(false);
+            });
         }).catch((err) => {
             console.error("Error fetching user profile", err);
             setIsLoading(false);

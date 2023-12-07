@@ -20,6 +20,7 @@ interface HeaderProps {
   onBack?: () => void;
   onCancel?: () => void;
   triangleHeight?: number;
+  textColor?: keyof typeof Colors;
 }
 
 const Header = (props: HeaderProps = {}) => {
@@ -33,11 +34,12 @@ const Header = (props: HeaderProps = {}) => {
       >
         {props.onBack ? (
           <TouchableOpacity onPress={props.onBack}>
-            <NavArrowLeft width={24} height={24} strokeWidth={4} color={Colors.white} style={{
-              paddingHorizontal: 40,
-              marginTop: 46,
-              marginBottom: 10,
-            }} />
+            <NavArrowLeft width={24} height={24} strokeWidth={4} color={Colors[props.textColor ?? "white"]}
+              style={{
+                paddingHorizontal: 40,
+                marginTop: 46,
+                marginBottom: 10,
+              }} />
           </TouchableOpacity>
         ) : <View style={{
           paddingHorizontal: 34,
@@ -62,7 +64,7 @@ const Header = (props: HeaderProps = {}) => {
                 height: 36,
                 width: 51,
               }}
-              color={Colors.white}
+              color={Colors[props.textColor ?? "white"]}
             />
           )}
           {/*If showProgress is true, show the progress bar*/}
@@ -80,13 +82,13 @@ const Header = (props: HeaderProps = {}) => {
           }}
         >
           {/*If title is not null, show the title*/}
-          {props.title && <Text style={textStyle.heading}>{props.title}</Text>}
+          {props.title && <Text style={[textStyle.heading, { color: Colors[props.textColor ?? "white"] }]}>{props.title}</Text>}
           {/*If subtitle is not null, show the subtitle*/}
           {props.subtitle && (
-            <Text style={textStyle.subtitle}>{props.subtitle}</Text>
+            <Text style={[textStyle.subtitle, { color: Colors[props.textColor ?? "white"] }]}>{props.subtitle}</Text>
           )}
           {/*If body is not null, show the body*/}
-          {props.body && <Text style={textStyle.body}>{props.body}</Text>}
+          {props.body && <Text style={[textStyle.body, { color: Colors[props.textColor ?? "white"] }]}>{props.body}</Text>}
           {/*If action is not null, show the action*/}
           {props.action && props.action}
         </View>

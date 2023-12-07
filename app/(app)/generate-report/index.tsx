@@ -9,7 +9,7 @@ import Dropdown from "../../../components/dropdown";
 import TextButton from "../../../components/textButton";
 import React from "react";
 import { ScrollView } from "react-native-gesture-handler";
-import { useReporter } from "../../../lib/reporting_ctx";
+import { frequencyMap, useReporter } from "../../../lib/reporting_ctx";
 
 export default function Home() {
   const reporter = useReporter();
@@ -33,15 +33,9 @@ export default function Home() {
               options={["Daily", "Weekly", "Monthly", "Bi-yearly"]}
               maxCount={1}
               onPress={(selected) => {
-                let fequencyMap = {
-                  "Daily": 1,
-                  "Weekly": 7,
-                  "Monthly": 30,
-                  "Bi-yearly": 180,
-
-                }
+                console.log(frequencyMap[selected]);
                 reporter.buildReporter({
-                  frequencyDays: fequencyMap[selected[0] as keyof typeof fequencyMap],
+                  frequencyDays: frequencyMap[selected],
                 })
                 router.push("/generate-report/type");
               }}

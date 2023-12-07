@@ -24,7 +24,7 @@ export default function Home() {
           title="Step 2"
           subtitle={"What is your name?"}
           body="You have to start somewhere, right?"
-          color="yellow"
+          color="green"
           onBack={() => router.back()}
           action={
             // Buttons go here

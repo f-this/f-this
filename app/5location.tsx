@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { View } from "react-native";
 import Header from "../components/header";
 import { router } from "expo-router";
 import TextButton from "../components/textButton";

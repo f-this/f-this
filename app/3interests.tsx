@@ -3,7 +3,6 @@ import Header from "../components/header";
 import { router } from "expo-router";
 import React from "react";
 import TextBoxInput from "../components/textBox";
-import Checkbox from "../components/checkbox";
 import Dropdown from "../components/dropdown";
 import FabButton from "../components/fab";
 import { ArrowRight } from "iconoir-react-native";
@@ -47,7 +46,6 @@ export default function Home() {
                   "Biking",
                 ]}
                 onMultiselect={(_) => {
-                  console.log(_);
                   handleInterestChange(_);
                 }}
                 onPress={() => { }}

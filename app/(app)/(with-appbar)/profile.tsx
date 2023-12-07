@@ -31,7 +31,6 @@ export default function Home() {
   const params = useGlobalSearchParams();
 
   if (params.push === "true") {
-    console.log("pushing");
     updateUserAddictionData();
   }
 
@@ -109,7 +108,7 @@ export default function Home() {
           <Button
             title="Edit My Preferences"
             color="blue"
-            onPress={() => console.log("hello")}
+            onPress={() => { }}
             textColor="white"
             marginTop={10}
           />

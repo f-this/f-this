@@ -1,17 +1,10 @@
-import { View, Text } from "react-native";
+import { View, } from "react-native";
 import Header from "../../../components/header";
 import Button from "../../../components/button";
 import { router } from "expo-router";
 import React from "react";
-import textStyle from "../../../constants/textStyles";
-import Colors from "../../../constants/Colors";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import { InfoCircle, Refresh } from "iconoir-react-native";
-import { ReportMethod, useReporter } from "../../../lib/reporting_ctx";
 
 export default function Home() {
-  const [selected, setSelected] = React.useState<string[]>([]);
-  const { buildReporter } = useReporter();
 
   return (
     <View

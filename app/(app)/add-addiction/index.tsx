@@ -27,7 +27,6 @@ export default function Home() {
     } else {
       setRoute(selected[0]);
     }
-    console.log(selected);
   }, [selected]);
   return (
     <ScrollView>

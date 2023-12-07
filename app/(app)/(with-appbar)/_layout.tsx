@@ -1,5 +1,5 @@
-import { Redirect, Stack } from 'expo-router';
-import { Text, View } from 'react-native';
+import { Stack } from 'expo-router';
+import { View } from 'react-native';
 import React from 'react';
 import AppBar from '../../../components/appBar';
 

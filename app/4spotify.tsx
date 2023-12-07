@@ -1,12 +1,9 @@
-import { View, Text } from "react-native";
+import { View } from "react-native";
 import Header from "../components/header";
 import { router } from "expo-router";
 import TextButton from "../components/textButton";
 import React from "react";
 import Button from "../components/button";
-import { FontAwesome } from "@expo/vector-icons";
-import Colors from "../constants/Colors";
-import { Spotify } from "iconoir-react-native";
 import { Path, Svg } from "react-native-svg";
 import { useProf } from "../lib/profile_ctx";
 

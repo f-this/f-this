@@ -1,11 +1,9 @@
-import { View, Text, KeyboardAvoidingView } from "react-native";
-import { useState, useContext } from "react";
+import { View, KeyboardAvoidingView } from "react-native";
+import { useState } from "react";
 import Header from "../components/header";
 import { router } from "expo-router";
 import React from "react";
 import TextBoxInput from "../components/textBox";
-import FabButton from "../components/fab";
-import * as Iconoir from "iconoir-react-native";
 import { useProf } from "../lib/profile_ctx"; // Update the path
 import { ScrollView } from "react-native";
 

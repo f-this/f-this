@@ -7,6 +7,7 @@ import TextBoxInput from "../../../components/textBox";
 import textStyle from "../../../constants/textStyles";
 import Colors from "../../../constants/Colors";
 import { useProf } from "../../../lib/profile_ctx";
+
 export default function Home() {
   const { storeLocalAddictionData } = useProf();
   const [custom, setCustom] = useState("");

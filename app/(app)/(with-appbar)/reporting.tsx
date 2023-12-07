@@ -1,5 +1,5 @@
 import { router } from "expo-router";
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, StyleSheet } from "react-native";
 import Button from "../../../components/button";
 import Header from "../../../components/header";
 import { daysMap, frequencyMap, useReporter } from "../../../lib/reporting_ctx";
@@ -53,14 +53,7 @@ export default function Reporting() {
                                 key={"Button"}
                             />
                             {reporters.map((reporter) => (
-                                <View style={{
-                                    width: "100%",
-                                    flexDirection: "column",
-                                    backgroundColor: Colors.white,
-                                    ...shadow as any,
-                                    marginBottom: 20,
-                                    key: reporter.id,
-                                }} >
+                                <View style={styles.reporterView} >
                                     <View style={{
                                         flexDirection: "row",
                                         justifyContent: "space-between",
@@ -73,12 +66,7 @@ export default function Reporting() {
                                             alignItems: "center",
                                         }}>
                                             <Image source={require("../../../assets/images/Ellipse2.png")} style={{ marginRight: 10 }} />
-                                            <Text style={{
-                                                color: Colors.black,
-                                                fontSize: 16,
-                                                fontWeight: "900",
-                                                fontStyle: "italic",
-                                            }}>{reporter.name}</Text>
+                                            <Text style={styles.detail}>{reporter.name}</Text>
                                         </View>
                                         <EditPencil
                                             width={24}
@@ -88,66 +76,18 @@ export default function Reporting() {
                                         />
                                     </View>
                                     {/** Divider line */}
-                                    <View style={{
-                                        backgroundColor: Colors.black,
-                                        height: 1,
-                                        width: "100%",
-                                    }} />
-                                    <View style={{
-                                        flexDirection: "row",
-                                        justifyContent: "space-between",
-                                        alignItems: "center",
-                                        paddingHorizontal: 20,
-                                        paddingTop: 20,
-                                        paddingBottom: 10,
-                                    }}>
-                                        <Text style={{
-                                            color: Colors.black,
-                                            fontSize: 16,
-                                        }}>Reporting Frequency</Text>
-                                        <Text style={{
-                                            color: Colors.black,
-                                            fontSize: 16,
-                                            fontWeight: "900",
-                                            fontStyle: "italic",
-                                        }}>{daysMap[reporter.frequencyDays]}</Text>
+                                    <View style={styles.divider} />
+                                    <View style={[styles.viewDetail, { paddingTop: 20 }]}>
+                                        <Text style={styles.sub}>Reporting Frequency</Text>
+                                        <Text style={styles.detail}>{daysMap[reporter.frequencyDays]}</Text>
                                     </View>
-                                    <View style={{
-                                        flexDirection: "row",
-                                        justifyContent: "space-between",
-                                        alignItems: "center",
-                                        paddingHorizontal: 20,
-                                        paddingVertical: 10,
-                                    }}>
-                                        <Text style={{
-                                            color: Colors.black,
-                                            fontSize: 16,
-                                        }}>Sharing</Text>
-                                        <Text style={{
-                                            color: Colors.black,
-                                            fontSize: 16,
-                                            fontWeight: "900",
-                                            fontStyle: "italic",
-                                        }}>{reporter.reportType.length.toString() + ` Data Point${reporter.reportType.length > 1 ? "s" : ""}`}</Text>
+                                    <View style={styles.viewDetail}>
+                                        <Text style={styles.sub}>Sharing</Text>
+                                        <Text style={styles.detail}>{reporter.reportType.length.toString() + ` Data Point${reporter.reportType.length > 1 ? "s" : ""}`}</Text>
                                     </View>
-                                    <View style={{
-                                        flexDirection: "row",
-                                        justifyContent: "space-between",
-                                        alignItems: "center",
-                                        paddingHorizontal: 20,
-                                        paddingVertical: 10,
-                                        paddingBottom: 20,
-                                    }}>
-                                        <Text style={{
-                                            color: Colors.black,
-                                            fontSize: 16,
-                                        }}>Method</Text>
-                                        <Text style={{
-                                            color: Colors.black,
-                                            fontSize: 16,
-                                            fontWeight: "900",
-                                            fontStyle: "italic",
-                                        }}>{reporter.method}</Text>
+                                    <View style={styles.viewDetail}>
+                                        <Text style={styles.sub}>Method</Text>
+                                        <Text style={styles.detail}>{reporter.method}</Text>
                                     </View>
                                 </View>
                             ))}
@@ -183,3 +123,36 @@ export default function Reporting() {
         </View>
     );
 }
+
+const styles = StyleSheet.create({
+    detail: {
+        color: Colors.black,
+        fontSize: 16,
+        fontWeight: "900",
+        fontStyle: "italic",
+    },
+    sub: {
+        color: Colors.black,
+        fontSize: 16,
+    },
+    viewDetail: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        paddingHorizontal: 20,
+        paddingVertical: 10,
+        paddingBottom: 20,
+    },
+    divider: {
+        backgroundColor: Colors.black,
+        height: 1,
+        width: "100%",
+    },
+    reporterView: {
+        width: "100%",
+        flexDirection: "column",
+        backgroundColor: Colors.white,
+        ...shadow as any,
+        marginBottom: 20,
+    }
+});

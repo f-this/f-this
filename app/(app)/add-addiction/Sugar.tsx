@@ -1,4 +1,4 @@
-import { View, Text, KeyboardAvoidingView, ScrollView } from "react-native";
+import { View, Text, KeyboardAvoidingView, ScrollView, StyleSheet } from "react-native";
 import Header from "../../../components/header";
 import Button from "../../../components/button";
 import { router } from "expo-router";
@@ -52,14 +52,7 @@ export default function Home() {
                   }}
                 >
                   <Text
-                    style={[
-                      {
-                        color: Colors.darkGray,
-                        fontSize: 16,
-                        fontWeight: "900",
-                        fontStyle: "italic",
-                      },
-                    ]}
+                    style={styles.mainText}
                   >
                     Experts say this helps...
                   </Text>
@@ -95,14 +88,7 @@ export default function Home() {
                   }}
                 >
                   <Text
-                    style={[
-                      {
-                        color: Colors.darkGray,
-                        fontSize: 16,
-                        fontWeight: "900",
-                        fontStyle: "italic",
-                      },
-                    ]}
+                    style={styles.mainText}
                   >
                     But this might also work for you...
                   </Text>
@@ -183,3 +169,12 @@ export default function Home() {
     </ScrollView>
   );
 }
+
+const styles = StyleSheet.create({
+  mainText: {
+    color: Colors.darkGray,
+    fontSize: 16,
+    fontWeight: "900",
+    fontStyle: "italic",
+  },
+});

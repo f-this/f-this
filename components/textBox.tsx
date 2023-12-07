@@ -3,10 +3,7 @@ import {
   TextInput,
   View,
   StyleSheet,
-  ViewStyle,
   FlexAlignType,
-  ImageStyle,
-  TextStyle,
 } from "react-native";
 import Colors from "../constants/Colors";
 import shadow from "../constants/shadows";

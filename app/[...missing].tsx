@@ -1,5 +1,5 @@
 import { router } from "expo-router";
-import { Text, View } from "react-native";
+import { View } from "react-native";
 import Header from "../components/header";
 import React from "react";
 import Button from "../components/button";

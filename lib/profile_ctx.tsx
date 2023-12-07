@@ -132,8 +132,6 @@ export const ProfileProvider: React.FC<ProfileContextProps> = ({
             setCreatedAt(data.created_at);
             setInterests(data.interests);
 
-            console.log("Fetched data: " + JSON.stringify(data));
-
             await value.fetchUserAddictionData();
 
           } else {
@@ -173,7 +171,6 @@ export const ProfileProvider: React.FC<ProfileContextProps> = ({
       if (data.addictionData) {
         setUserAddictionData(data.addictionData);
       }
-      console.log("Storing local data:", data);
     },
     updateUserProfile: async () => {
       let fallbackUser = (await supabase.auth.getUser()).data.user;
@@ -230,7 +227,6 @@ export const ProfileProvider: React.FC<ProfileContextProps> = ({
             Object.entries(submit).filter(([_, v]) => v != null || v === user.id)
           );
 
-          console.log("Submitting data: " + JSON.stringify(cleanData));
           const { data, error } = await supabase
             .from("user_addictions")
             .upsert(cleanData)
@@ -239,9 +235,7 @@ export const ProfileProvider: React.FC<ProfileContextProps> = ({
             console.error("Error updating user addiction data:", error);
           }
 
-        } else {
-          console.log("No user data available or already loading.");
-        }
+        } 
 
         loadingInt = false;
       } catch (error) {
@@ -267,7 +261,6 @@ export const ProfileProvider: React.FC<ProfileContextProps> = ({
               ...data[0],
               days: calculateDays
             });
-            console.log("Fetched data: " + JSON.stringify(data));
           } else {
             console.error("Error fetching user profile: No data found");
           }
@@ -297,7 +290,6 @@ export const ProfileProvider: React.FC<ProfileContextProps> = ({
           days: calculateDays
         });
       }
-      console.log("Storing local data:", data);
     }
   };
 

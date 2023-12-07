@@ -1,17 +1,9 @@
 import { View, Text, ScrollView, KeyboardAvoidingView } from "react-native";
 import Header from "../../../components/header";
 import { router } from "expo-router";
-import Button from "../../../components/button";
 import TextBoxInput from "../../../components/textBox";
-import textStyle from "../../../constants/textStyles";
-import Colors from "../../../constants/Colors";
 import Dropdown from "../../../components/dropdown";
-import TextButton from "../../../components/textButton";
 import React, { useEffect } from "react";
-import { ArrowRight } from "iconoir-react-native";
-import FabButton from "../../../components/fab";
-import PhoneNumberInput from "../../../components/textBoxPhone";
-import ContactButton from "../../../components/contactButton";
 import * as Contacts from 'expo-contacts';
 import { ReportMethod, useReporter } from "../../../lib/reporting_ctx";
 
@@ -71,7 +63,6 @@ export default function Home() {
               } />
               <Dropdown options={(searchContacts.length !== 0 ? searchContacts : contacts).map((_) => _.name)} maxCount={1} onPress={(selected) => {
                 let contact = (searchContacts.length !== 0 ? searchContacts : contacts).find((_) => _.name === selected);
-                console.log(JSON.stringify(contact));
                 buildReporter({
                   handle: contact!.phoneNumbers?.[0].digits ?? "",
                   name: contact!.name ?? "",

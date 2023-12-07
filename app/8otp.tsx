@@ -40,7 +40,6 @@ export default function Home() {
           interests: interests,
           phone: phone,
         } as Partial<UserContextData>;
-        console.log("Updating user profile with data:", data);
 
         updateUserProfile(data);
 

@@ -80,15 +80,12 @@ export const ReporterProvider: React.FC<ReporterContextProps> = ({
                 } as Reporter;
             });
             setReporters(newReps);
-            console.log("Fetched reporters", newReps);
         }
     }
 
     const buildReporter = (partialReporterUpdate: Partial<Reporter>) => {
         if (partialReporter == null || partialReporter.id == null) {
-            console.log("Creating new reporter");
             const newReporter = { id: uuid.v4().toString(), ...partialReporter, ...partialReporterUpdate };
-            console.log("New reporter", newReporter);
             setPartialReporter(newReporter);
             return;
         }
@@ -100,25 +97,9 @@ export const ReporterProvider: React.FC<ReporterContextProps> = ({
         };
 
         setPartialReporter(newRep);
-        console.log("Updating reporter with", partialReporterUpdate);
-
-        // Check if reporter is complete
-        if (newRep == null) {
-            console.log("No name");
-        } if (newRep == null) {
-            console.log("No method");
-        } if (newRep == null) {
-            console.log("No handle");
-        } if (newRep == null) {
-            console.log("No frequency");
-        } if (newRep == null) {
-            console.log("No report type");
-        }
 
         if (newRep.name != null && newRep.method != null && newRep.handle != null && newRep.frequencyDays != null && newRep.reportType != null) {
-            console.log("Reporter complete");
             // Add reporter to state
-            console.log("Adding reporter", newRep);
             addReporter(newRep as Reporter);
             // Clear partial reporter   
             setPartialReporter(null);

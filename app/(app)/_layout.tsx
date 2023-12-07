@@ -27,7 +27,6 @@ export default function AppLayout() {
     }
 
     if (!profile.hasProfile() && !isLoading) {
-        console.log("Fetching user profile");
         profile.fetchUserProfile().then(() => {
             reporting.fetchReporters().then(() => {
                 setIsLoading(false);
@@ -42,7 +41,6 @@ export default function AppLayout() {
         setIsLoading(true);
     }
     else if (profile.hasProfile() && !isLoading && !profile.name) {
-        console.log("User has profile but no name");
         return <Redirect href="/1age" />;
     }
 

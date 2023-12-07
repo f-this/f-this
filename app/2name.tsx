@@ -1,4 +1,4 @@
-import { View, Text, KeyboardAvoidingView, ScrollView } from "react-native";
+import { View, KeyboardAvoidingView, ScrollView } from "react-native";
 import Header from "../components/header";
 import { router } from "expo-router";
 import React from "react";

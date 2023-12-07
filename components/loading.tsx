@@ -1,8 +1,6 @@
-import { router } from "expo-router";
-import { Text, View } from "react-native";
+import { View } from "react-native";
 import Header from "./header";
 import React from "react";
-import Button from "./button";
 
 export default function LoadingPage() {
   return (

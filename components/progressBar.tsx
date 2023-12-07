@@ -1,6 +1,6 @@
 import React from "react";
 import { View, StyleSheet, ViewStyle, DimensionValue } from "react-native";
-import shadow, { shadowSmall } from "../constants/shadows";
+import { shadowSmall } from "../constants/shadows";
 
 interface ProgressBarProps {
   fillPercentage: number; // A number between 0 and 100

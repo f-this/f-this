@@ -1,5 +1,4 @@
 import { View, Text } from "react-native";
-import shadow from "../../constants/shadows";
 import textStyle from "../../constants/textStyles";
 import Colors from "../../constants/Colors";
 import { FlatList } from "react-native-gesture-handler";
@@ -84,8 +83,8 @@ function MilestoneItem(props: Milestone) {
         <View style={{ flexDirection: "row", alignItems: "center", paddingHorizontal: 43, width: "100%", marginTop: 20 }}>
             <CheckboxNoState initialState={props.completed} selectedColor={"blue"} onPress={() => { }} />
             <View style={{ flexDirection: "column", alignItems: "flex-start", marginLeft: 15 }}>
-                <Text style={[{ color: Colors.disabled, marginTop: 0, textAlign: "left", fontSize: 13, fontStyle: "italic", fontWeight: "700" }]}>{props.title}</Text>
-                <Text style={[{ color: Colors.black, marginTop: 5, textAlign: "center", fontSize: 15, }]}>{props.description}</Text>
+                <Text style={{ color: Colors.disabled, marginTop: 0, textAlign: "left", fontSize: 13, fontStyle: "italic", fontWeight: "700" }}>{props.title}</Text>
+                <Text style={{ color: Colors.black, marginTop: 5, textAlign: "center", fontSize: 15, }}>{props.description}</Text>
             </View>
         </View>
     );

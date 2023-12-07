@@ -1,9 +1,7 @@
 import { useState } from "react";
 import Colors from "../constants/Colors";
 import { TouchableOpacity, View, StyleSheet } from "react-native";
-import shadow from "../constants/shadows";
 import { Check } from "iconoir-react-native";
-
 
 interface checkboxProps {
     onPress: (newState: boolean) => void;

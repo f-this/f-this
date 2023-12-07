@@ -1,5 +1,4 @@
 import { View, Text, Image, StyleSheet } from "react-native";
-import { useEffect } from "react";
 import textStyle from "../../constants/textStyles";
 import Colors from "../../constants/Colors";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -7,6 +6,7 @@ import { Svg, Path } from "react-native-svg";
 import { useProf } from "../../lib/profile_ctx";
 import { useAuth } from "../../lib/auth_ctx";
 import TextButton from "../textButton";
+
 interface profileHeaderProps {
   random?: string;
 }

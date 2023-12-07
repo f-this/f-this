@@ -1,5 +1,5 @@
 import React from "react";
-import { View, SafeAreaView, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, SafeAreaView, Text, TouchableOpacity } from "react-native";
 import Svg, { Path } from "react-native-svg";
 import Colors from "../constants/Colors";
 import Logo from "./logo";

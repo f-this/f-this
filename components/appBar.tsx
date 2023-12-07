@@ -4,13 +4,12 @@ import Colors from "../constants/Colors";
 import Logo from "./logo";
 import { HomeAltSlimHoriz } from "iconoir-react-native";
 import { ProfileCircle } from "iconoir-react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { router, useGlobalSearchParams, usePathname } from "expo-router";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useAuth } from "../lib/auth_ctx";
 import { BlurView } from "expo-blur";
 
-export default function appBar() {
+export default function AppBar() {
   const pathname = usePathname();
   const params = useGlobalSearchParams();
   const auth = useAuth();
@@ -105,7 +104,6 @@ export default function appBar() {
             />
           </TouchableOpacity>
         )}
-
       </View>
     </BlurView>
   );

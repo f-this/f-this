@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { TextInput, View, Image, StyleSheet, Text } from "react-native";
+import { View, Image, StyleSheet } from "react-native";
 import Colors from "../constants/Colors";
 import shadow from "../constants/shadows";
 import { MaskedTextInput } from "react-native-mask-text";

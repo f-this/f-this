@@ -3,8 +3,6 @@ import {
   View,
   TextInput,
   StyleSheet,
-  TextStyle,
-  ViewStyle,
   Text,
 } from "react-native";
 import Colors from "../constants/Colors";

@@ -1,10 +1,12 @@
-import { View, Text } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import shadow from "../../constants/shadows";
 import textStyle from "../../constants/textStyles";
 import Colors from "../../constants/Colors";
 import ConfettiCannon from "react-native-confetti-cannon";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import { useProf } from "../../lib/profile_ctx";
+
+
 export default function Streak() {
     const { addictionData } = useProf();
     let explosion: ConfettiCannon | null = null;
@@ -18,14 +20,7 @@ export default function Streak() {
     return (
         <GestureDetector gesture={tap}>
             <View
-                style={{
-                    flexDirection: "row",
-                    alignItems: "flex-end",
-                    paddingHorizontal: 43,
-                    width: "100%",
-                    position: "absolute",
-                    top: 15,
-                }}
+                style={styles.mainView}
             >
                 <ConfettiCannon
                     count={200}
@@ -36,38 +31,19 @@ export default function Streak() {
                     explosionSpeed={1000}
                 />
                 <View
-                    style={{
-                        backgroundColor: Colors.blue,
-                        height: 85,
-                        width: 85,
-                        justifyContent: "center",
-                        ...(shadow as any),
-                    }}
+                    style={styles.dayView}
                 >
                     <Text
                         style={[
                             textStyle.subtitle,
-                            {
-                                color: Colors.white,
-                                marginTop: 0,
-                                textAlign: "center",
-                                fontStyle: "normal",
-                            },
+                            styles.subtitleExt,
                         ]}
                     >
                         {addictionData?.days() ?? "0"}
                     </Text>
                 </View>
                 <View
-                    style={{
-                        alignItems: "center",
-                        justifyContent: "center",
-                        paddingHorizontal: 20,
-                        flex: 1,
-                        height: 41,
-                        backgroundColor: Colors.white,
-                        ...(shadow as any),
-                    }}
+                    style={styles.wideView}
                 >
                     <Text
                         style={[
@@ -82,3 +58,36 @@ export default function Streak() {
         </GestureDetector>
     );
 }
+
+const styles = StyleSheet.create({
+    wideView: {
+        alignItems: "center",
+        justifyContent: "center",
+        paddingHorizontal: 20,
+        flex: 1,
+        height: 41,
+        backgroundColor: Colors.white,
+        ...(shadow as any),
+    },
+    subtitleExt: {
+        color: Colors.white,
+        marginTop: 0,
+        textAlign: "center",
+        fontStyle: "normal",
+    },
+    dayView: {
+        backgroundColor: Colors.blue,
+        height: 85,
+        width: 85,
+        justifyContent: "center",
+        ...(shadow as any),
+    },
+    mainView: {
+        flexDirection: "row",
+        alignItems: "flex-end",
+        paddingHorizontal: 43,
+        width: "100%",
+        position: "absolute",
+        top: 15,
+    },
+});

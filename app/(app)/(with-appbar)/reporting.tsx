@@ -50,6 +50,7 @@ export default function Reporting() {
                                 style={{
                                     paddingVertical: 10,
                                 }}
+                                key={"Button"}
                             />
                             {reporters.map((reporter) => (
                                 <View style={{
@@ -58,6 +59,7 @@ export default function Reporting() {
                                     backgroundColor: Colors.white,
                                     ...shadow as any,
                                     marginBottom: 20,
+                                    key: reporter.id,
                                 }} >
                                     <View style={{
                                         flexDirection: "row",

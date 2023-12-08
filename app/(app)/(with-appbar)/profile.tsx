@@ -65,7 +65,7 @@ export default function Home() {
               You have been working on this for
             </Text>
             <Text style={StyleSheet.compose(textStyle.body, styles.answer)}>
-              {addictionData?.addiction ? `${addictionData?.days()} days` : "0 days"}
+              {addictionData?.addiction ? `${addictionData?.days} days` : "0 days"}
             </Text>
           </View>
           <View style={styles.row}>

@@ -8,7 +8,7 @@ export interface UserAddictionData {
   addiction?: string;
   alternative?: string;
   createdAt?: string;
-  days: () => string;
+  days: string;
 }
 
 export interface UserContextData {
@@ -80,16 +80,15 @@ export const ProfileProvider: React.FC<ProfileContextProps> = ({
     };
   }, []);
 
-  function calculateDays() {
-    if (userAddictionData?.createdAt) {
-      const date1 = new Date(userAddictionData?.createdAt);
-      const date2 = new Date();
-      const diffTime = Math.abs(date2.getTime() - date1.getTime());
+  function calculateDays(date: string | undefined) {
+    if (date) {
+      const today = new Date();
+      const date2 = new Date(date);
+      const diffTime = Math.abs(today.getTime() - date2.getTime());
       const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
       return diffDays.toString();
-    } else {
-      return "0";
     }
+    return "0";
   }
 
   const value: UserContextData = {
@@ -235,7 +234,7 @@ export const ProfileProvider: React.FC<ProfileContextProps> = ({
             console.error("Error updating user addiction data:", error);
           }
 
-        } 
+        }
 
         loadingInt = false;
       } catch (error) {
@@ -256,10 +255,15 @@ export const ProfileProvider: React.FC<ProfileContextProps> = ({
             .select("*")
             .eq("user_id", user.id)
 
+          console.log(data);
+
           if (data) {
             setUserAddictionData({
-              ...data[0],
-              days: calculateDays
+              id: data[0].id,
+              addiction: data[0].addiction,
+              alternative: data[0].alternative,
+              createdAt: data[0].created_at,
+              days: calculateDays(data[0].created_at)
             });
           } else {
             console.error("Error fetching user profile: No data found");
@@ -278,7 +282,7 @@ export const ProfileProvider: React.FC<ProfileContextProps> = ({
           addiction: data.addiction,
           alternative: userAddictionData?.alternative,
           createdAt: userAddictionData?.createdAt,
-          days: calculateDays
+          days: calculateDays(userAddictionData?.createdAt)
         });
       }
       if (data.alternative) {
@@ -287,7 +291,7 @@ export const ProfileProvider: React.FC<ProfileContextProps> = ({
           addiction: userAddictionData?.addiction,
           alternative: data.alternative,
           createdAt: userAddictionData?.createdAt,
-          days: calculateDays
+          days: calculateDays(userAddictionData?.createdAt)
         });
       }
     }

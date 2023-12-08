@@ -39,7 +39,7 @@ export default function Streak() {
                             styles.subtitleExt,
                         ]}
                     >
-                        {addictionData?.days() ?? "0"}
+                        {addictionData?.days ?? "0"}
                     </Text>
                 </View>
                 <View

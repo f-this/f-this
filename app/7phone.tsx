@@ -11,6 +11,7 @@ import { useProf } from "../lib/profile_ctx";
 
 export default function Home() {
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [isPhoneValid, setIsPhoneValid] = useState(false);
   const { signIn } = useAuth();
   const { storeLocal } = useProf();
 
@@ -31,23 +32,25 @@ export default function Home() {
               <PhoneNumberInput
                 onChange={(phone, isValid) => {
                   setPhoneNumber(phone);
+                  setIsPhoneValid(isValid);
                 }}
               />
               <View style={{ flexDirection: "row", justifyContent: "flex-end" }}>
-                <FabButton
-                  onPress={async () => {
-                    const { data } = await signIn(phoneNumber);
-                    storeLocal({ phone: phoneNumber });
-                    router.push("/8otp");
-                  }}
-                >
-                  <ArrowRight
-                    color="black"
-                    width={30}
-                    height={30}
-                    strokeWidth={2}
-                  />
-                </FabButton>
+                {isPhoneValid &&
+                  <FabButton
+                    onPress={async () => {
+                      const { data } = await signIn(phoneNumber);
+                      storeLocal({ phone: phoneNumber });
+                      router.push("/8otp");
+                    }}
+                  >
+                    <ArrowRight
+                      color="black"
+                      width={30}
+                      height={30}
+                      strokeWidth={2}
+                    />
+                  </FabButton>}
               </View>
             </View>
           }

@@ -8,12 +8,20 @@ import { ArrowRight } from "iconoir-react-native";
 import FabButton from "../components/fab";
 import { useAuth } from "../lib/auth_ctx";
 import { useProf } from "../lib/profile_ctx";
+import LoadingPage from "../components/loading";
 
 export default function Home() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [isPhoneValid, setIsPhoneValid] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const { signIn } = useAuth();
   const { storeLocal } = useProf();
+
+  if (isLoading) {
+    return (
+      <LoadingPage />
+    );
+  }
 
   return (
     <ScrollView >
@@ -39,9 +47,15 @@ export default function Home() {
                 {isPhoneValid &&
                   <FabButton
                     onPress={async () => {
-                      const { data } = await signIn(phoneNumber);
-                      storeLocal({ phone: phoneNumber });
-                      router.push("/8otp");
+                      setIsLoading(true);
+                      try {
+                        await signIn(phoneNumber);
+                        storeLocal({ phone: phoneNumber });
+                        router.push("/8otp");
+                      } catch (e) {
+                        console.log(e);
+                        setIsLoading(false);
+                      }
                     }}
                   >
                     <ArrowRight

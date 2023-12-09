@@ -10,7 +10,7 @@ export default function LoadingPage() {
         title="Welcome,"
         subtitle="Just a sec."
         body={"We are loding some things, it will just just be a couple seconds..."}
-        color="blue"
+        color="black"
       />
     </View>
   );

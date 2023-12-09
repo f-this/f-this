@@ -34,7 +34,7 @@ const PhoneNumberInput: React.FC<PhoneNumberInputProps> = (
         value={inputText}
         onChangeText={(_, text) => {
           setInputText(text);
-          props.onChange?.(text, text.length == 10);
+          props.onChange?.(text, text.length == 11);
         }}
       />
     </View>
